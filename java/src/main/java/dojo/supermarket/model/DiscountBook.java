@@ -46,14 +46,14 @@ public class DiscountBook {
 
     private Discount getFiveForAmountDiscount(Product p, double quantity, Offer offer, double unitPrice, int quantityAsInt, int numItemsInDiscount, int numberOfXs) {
 
-        double discountTotal = unitPrice * quantity - (offer.price * numberOfXs + quantityAsInt % 5 * unitPrice);
-        Discount discount = new Discount(p, numItemsInDiscount + " for " + offer.price, -discountTotal);
+        double discountTotal = unitPrice * quantity - (offer.getPrice() * numberOfXs + quantityAsInt % 5 * unitPrice);
+        Discount discount = new Discount(p, numItemsInDiscount + " for " + offer.getPrice(), -discountTotal);
         return discount;
     }
 
     private Discount getTenPercentDiscount(Product p, double quantity, Offer offer, double unitPrice) {
 
-        Discount discount = new Discount(p, offer.price + "% off", -quantity * unitPrice * offer.price / 100.0);
+        Discount discount = new Discount(p, offer.getPrice() + "% off", -quantity * unitPrice * offer.getPrice() / 100.0);
         return discount;
     }
 
@@ -64,9 +64,9 @@ public class DiscountBook {
     }
 
     private Discount getTwoForAmountDiscount(Product p, double quantity, Offer offer, double unitPrice, int quantityAsInt, int numItemsInDiscount) {
-        double total = offer.price * (quantityAsInt / numItemsInDiscount) + quantityAsInt % 2 * unitPrice;
+        double total = offer.getPrice() * (quantityAsInt / numItemsInDiscount) + quantityAsInt % 2 * unitPrice;
         double discountN = unitPrice * quantity - total;
-        Discount discount = new Discount(p, "2 for " + offer.price, -discountN);
+        Discount discount = new Discount(p, "2 for " + offer.getPrice(), -discountN);
         return discount;
     }
 

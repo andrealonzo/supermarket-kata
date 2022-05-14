@@ -9,18 +9,18 @@ public class DiscountValidator {
     }
 
     public boolean isTenPercentDiscountOffer() {
-        return offer.offerType == SpecialOfferType.TenPercentDiscount;
+        return offer.getOfferType() == SpecialOfferType.TenPercentDiscount;
     }
 
     public boolean isFiveForAmountOffer() {
-        return offer.offerType == SpecialOfferType.FiveForAmount;
+        return offer.getOfferType() == SpecialOfferType.FiveForAmount;
     }
 
     public boolean isTwoForAmountOffer() {
-        return offer.offerType == SpecialOfferType.TwoForAmount;
+        return offer.getOfferType() == SpecialOfferType.TwoForAmount;
     }
 
     public boolean isThreeForTwoOffer() {
-        return offer.offerType == SpecialOfferType.ThreeForTwo;
+        return offer.getOfferType() == SpecialOfferType.ThreeForTwo;
     }
 }
