@@ -17,7 +17,7 @@ public class OfferBook {
 
         int numberOfXs = quantityAsEaches / numItemsInDiscount;
         if(offer.canBeApplied(offer, quantityAsEaches)){
-            discount = offer.getDiscountAmount(product, quantityInWeight, offer, unitPrice, quantityAsEaches, numItemsInDiscount,numberOfXs);
+            discount = offer.getDiscountAmount(product, quantityInWeight, unitPrice, quantityAsEaches, numItemsInDiscount,numberOfXs);
         }
         return discount;
     }

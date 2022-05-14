@@ -18,9 +18,9 @@ public class FiveForAmountOffer extends Offer{
     }
 
     @Override
-    public Discount getDiscountAmount(Product product, double quantityInWeight, Offer offer, double unitPrice, int quantityAsEaches, int numItemsInDiscount, int numberOfXs) {
-        double discountTotal = unitPrice * quantityInWeight - (offer.getPrice() * numberOfXs + quantityAsEaches % 5 * unitPrice);
-        Discount discount = new Discount(product, numItemsInDiscount + " for " + offer.getPrice(), -discountTotal);
+    public Discount getDiscountAmount(Product product, double quantityInWeight, double unitPrice, int quantityAsEaches, int numItemsInDiscount, int numberOfXs) {
+        double discountTotal = unitPrice * quantityInWeight - (this.getPrice() * numberOfXs + quantityAsEaches % 5 * unitPrice);
+        Discount discount = new Discount(product, numItemsInDiscount + " for " + this.getPrice(), -discountTotal);
         return discount;
     }
 }
