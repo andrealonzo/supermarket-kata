@@ -17,8 +17,8 @@ public class TwoForAmountOffer extends Offer{
     }
 
     @Override
-    public Discount getDiscountAmount(Product product, double quantityInWeight, double unitPrice, int quantity, int numItemsInDiscount, int numberOfXs) {
-        double total = this.getPrice() * (quantity / numItemsInDiscount) + quantity % 2 * unitPrice;
+    public Discount getDiscountAmount(Product product, double quantityInWeight, double unitPrice, int quantity, int numberOfXs) {
+        double total = this.getPrice() * (quantity / getNumItemsInOffer()) + quantity % 2 * unitPrice;
         double discountN = unitPrice * quantity - total;
         Discount discount = new Discount(product, "2 for " + this.getPrice(), -discountN);
         return discount;

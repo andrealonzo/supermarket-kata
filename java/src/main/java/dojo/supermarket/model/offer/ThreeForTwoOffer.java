@@ -18,7 +18,7 @@ public class ThreeForTwoOffer extends Offer{
     }
 
     @Override
-    public Discount getDiscountAmount(Product product, double quantityInWeight, double unitPrice, int quantityAsEaches, int numItemsInDiscount, int numberOfXs) {
+    public Discount getDiscountAmount(Product product, double quantityInWeight, double unitPrice, int quantityAsEaches, int numberOfXs) {
         double discountAmount = quantityInWeight * unitPrice - ((numberOfXs * 2 * unitPrice) + quantityAsEaches % 3 * unitPrice);
         Discount discount = new Discount(product, "3 for 2", -discountAmount);
         return discount;
