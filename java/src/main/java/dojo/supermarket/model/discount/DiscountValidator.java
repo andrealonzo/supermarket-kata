@@ -15,9 +15,12 @@ public class DiscountValidator {
         return offer.getOfferType() == SpecialOfferType.TenPercentDiscount;
     }
 
-    public boolean isFiveForAmountOffer() {
+    public boolean isNumForAmountOffer() {
         return offer.getOfferType() == SpecialOfferType.FiveForAmount;
     }
+//    public boolean isFiveForAmountOffer() {
+//        return offer.getOfferType() == SpecialOfferType.FiveForAmount;
+//    }
 
     public boolean isTwoForAmountOffer() {
         return offer.getOfferType() == SpecialOfferType.TwoForAmount;

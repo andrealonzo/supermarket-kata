@@ -33,7 +33,7 @@ public class DiscountBook {
 
     private boolean canFiveForAmountOfferBeApplied(Offer offer, int quantityAsInt) {
         DiscountValidator discountValidator = new DiscountValidator(offer);
-        return discountValidator.isFiveForAmountOffer() && quantityAsInt >= 5;
+        return discountValidator.isNumForAmountOffer() && quantityAsInt >= 5;
     }
 
     private boolean canThreeForTwoOfferBeApplied(Offer offer, int quantityAsInt) {
@@ -83,7 +83,7 @@ public class DiscountBook {
         } else if (discountValidator.isTwoForAmountOffer()) {
             numItemsInDiscount = 2;
 
-        } if (discountValidator.isFiveForAmountOffer()) {
+        } if (discountValidator.isNumForAmountOffer()) {
             numItemsInDiscount = 5;
         }
         return numItemsInDiscount;
