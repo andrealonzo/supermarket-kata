@@ -1,8 +1,10 @@
 package dojo.supermarket.model;
 
-import java.util.ArrayList;
+import dojo.supermarket.model.discount.Discount;
+import dojo.supermarket.model.discount.DiscountBook;
+import dojo.supermarket.model.offer.Offer;
+
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class ShoppingCart {

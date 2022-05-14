@@ -1,4 +1,8 @@
-package dojo.supermarket.model;
+package dojo.supermarket.model.discount;
+
+import dojo.supermarket.model.offer.Offer;
+import dojo.supermarket.model.Product;
+import dojo.supermarket.model.SupermarketCatalog;
 
 public class DiscountBook {
 

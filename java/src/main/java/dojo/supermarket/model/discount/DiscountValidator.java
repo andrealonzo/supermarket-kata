@@ -1,4 +1,7 @@
-package dojo.supermarket.model;
+package dojo.supermarket.model.discount;
+
+import dojo.supermarket.model.offer.Offer;
+import dojo.supermarket.model.offer.SpecialOfferType;
 
 public class DiscountValidator {
 

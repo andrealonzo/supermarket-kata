@@ -1,7 +1,9 @@
 package dojo.supermarket.model;
 
+import dojo.supermarket.model.offer.Offer;
+import dojo.supermarket.model.offer.SpecialOfferType;
+
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
