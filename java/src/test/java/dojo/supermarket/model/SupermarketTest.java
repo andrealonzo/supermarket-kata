@@ -132,7 +132,7 @@ public class SupermarketTest {
         catalog.addProduct(product, .69);
         cart.addProductQuantity(product, 2);
 
-        Offer offer = new Offer(OfferType.TwoForAmount, product, .99);
+        Offer offer = new TwoForAmountOffer(product, .99);
         teller.addOffer(offer);
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
@@ -145,9 +145,7 @@ public class SupermarketTest {
         catalog.addProduct(toothbrush, 0.99);
         Product apples = new Product("apples", ProductUnitType.Kilo);
         catalog.addProduct(apples, 1.99);
-
-       // Offer offer = new Offer(SpecialOfferType.TenPercentDiscount, toothbrush, 10.0);
-        Offer offer = new TenPercentDiscountOffer(toothbrush, 10.0);
+         Offer offer = new TenPercentDiscountOffer(toothbrush, 10.0);
 
         teller.addOffer(offer);
 
