@@ -53,7 +53,8 @@ public class SupermarketTest {
 
         cart.addProductQuantity(product, 1);
 
-        Offer offer = new Offer(OfferType.TenPercentDiscount, product, 10.0);
+        Offer offer = new TenPercentDiscountOffer(product, 10.0);
+   //     Offer offer = new Offer(OfferType.TenPercentDiscount, product, 10.0);
         teller.addOffer(offer);
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
@@ -68,7 +69,8 @@ public class SupermarketTest {
         catalog.addProduct(product, 2.49);
 
         cart.addProductQuantity(product, 1);
-        Offer offer = new Offer(OfferType.TenPercentDiscount, product, 10.0);
+
+        Offer offer = new TenPercentDiscountOffer(product, 10.0);
 
         teller.addOffer(offer);
 
@@ -77,13 +79,15 @@ public class SupermarketTest {
         assertEquals(2.24, receipt.getTotalPrice(), 0.01);
     }
     @Test
-    public void noDiscountOnEachItem(){
+    public void noDiscountIfNumItemsIsUnderLimit(){
 
         Product product = new Product("rice", ProductUnitType.Kilo);
         catalog.addProduct(product, 2.49);
         cart.addProductQuantity(product, 1);
 
-        Offer offer = new Offer(OfferType.FiveForAmount, product, 7.49);
+
+        Offer offer = new FiveForAmountOffer(product, 10.0);
+    //    Offer offer = new Offer(OfferType.FiveForAmount, product, 7.49);
         teller.addOffer(offer);
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);

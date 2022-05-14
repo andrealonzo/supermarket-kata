@@ -1,7 +1,7 @@
 package dojo.supermarket.model;
 
 import dojo.supermarket.model.discount.Discount;
-import dojo.supermarket.model.discount.DiscountBook;
+import dojo.supermarket.model.offer.OfferBook;
 import dojo.supermarket.model.offer.Offer;
 
 import java.util.HashMap;
@@ -9,9 +9,7 @@ import java.util.Map;
 
 public class ShoppingCart {
 /*
-    TODO:  Combine FiveForAmount and TwoForAmount into NumForAmount.  Make test to have 3 for amount.
-    TODO:  Make TenPercentDiscount into PercentDiscount.  Make test to have 20% discount.
-    TODO:  Make ThreeForTwo into NumForNumDiscount.  Make test to have FourForThree.
+    TODO:  Make DiscountValidator not check for types.  Remove offerType
     */
     private Map<Product, Double> productQuantitiesMap = new HashMap<>();
 
@@ -32,8 +30,8 @@ public class ShoppingCart {
             double quantityInWeight = productQuantitiesMap.get(product);
             if (productOfferMap.containsKey(product)) {
                 Offer offer = productOfferMap.get(product);
-                DiscountBook discountBook = new DiscountBook();
-                Discount discount = discountBook.getDiscount(catalog, product, quantityInWeight, offer);
+                OfferBook offerBook = new OfferBook();
+                Discount discount = offerBook.getDiscount(catalog, product, quantityInWeight, offer);
                if (discount != null)
                     receipt.addDiscount(discount);
             }

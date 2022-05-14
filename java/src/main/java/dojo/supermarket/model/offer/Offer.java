@@ -1,8 +1,9 @@
 package dojo.supermarket.model.offer;
 
 import dojo.supermarket.model.Product;
+import dojo.supermarket.model.discount.Discount;
 
-public class Offer {
+public abstract class Offer {
     private OfferType offerType;
     private final Product product;
     private double price;
@@ -25,6 +26,7 @@ public class Offer {
     }
 
 
+    public abstract boolean canBeApplied(Offer offer, int quantity);
 
-
+    public abstract Discount getDiscountAmount(Product product, double quantityInWeight, Offer offer, double unitPrice, int quantityAsEaches, int numItemsInDiscount, int numberOfXs);
 }

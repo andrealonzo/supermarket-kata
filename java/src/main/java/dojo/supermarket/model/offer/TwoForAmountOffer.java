@@ -1,10 +1,26 @@
 package dojo.supermarket.model.offer;
 
 import dojo.supermarket.model.Product;
+import dojo.supermarket.model.discount.Discount;
+import dojo.supermarket.model.discount.DiscountValidator;
 
 public class TwoForAmountOffer extends Offer{
 
     public TwoForAmountOffer(Product product, double price) {
         super(OfferType.TwoForAmount, product, price);
+    }
+
+    @Override
+    public boolean canBeApplied(Offer offer, int quantity) {
+        DiscountValidator discountValidator = new DiscountValidator(offer);
+        return discountValidator.isTwoForAmountOffer() && quantity >= 2;
+    }
+
+    @Override
+    public Discount getDiscountAmount(Product product, double quantityInWeight, Offer offer, double unitPrice, int quantity, int numItemsInDiscount, int numberOfXs) {
+        double total = offer.getPrice() * (quantity / numItemsInDiscount) + quantity % 2 * unitPrice;
+        double discountN = unitPrice * quantity - total;
+        Discount discount = new Discount(product, "2 for " + offer.getPrice(), -discountN);
+        return discount;
     }
 }

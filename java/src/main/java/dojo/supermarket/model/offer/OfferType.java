@@ -1,5 +1,5 @@
 package dojo.supermarket.model.offer;
 
 public enum OfferType {
-    ThreeForTwo, TenPercentDiscount, TwoForAmount, FiveForAmount, NumForAmount;
+    ThreeForTwo, TenPercentDiscount, TwoForAmount, FiveForAmount;
 }
