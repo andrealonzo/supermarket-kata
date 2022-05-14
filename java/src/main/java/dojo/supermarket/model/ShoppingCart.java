@@ -8,21 +8,19 @@ import java.util.Map;
 public class ShoppingCart {
 
     private final List<ProductQuantity> items = new ArrayList<>();
-    Map<Product, Double> productQuantities = new HashMap<>();
+    private Map<Product, Double> productQuantities = new HashMap<>();
 
-
-    List<ProductQuantity> getItems() {
+    public List<ProductQuantity> getItems() {
         return new ArrayList<>(items);
     }
 
-    void addItem(Product product) {
+    public void addItem(Product product) {
         this.addItemQuantity(product, 1.0);
     }
 
-    Map<Product, Double> productQuantities() {
+    public Map<Product, Double> productQuantities() {
         return productQuantities;
     }
-
 
     public void addItemQuantity(Product product, double quantity) {
         items.add(new ProductQuantity(product, quantity));
@@ -42,7 +40,7 @@ public class ShoppingCart {
                 int quantityAsInt = (int) quantity;
                 Discount discount = null;
                 int x = 1;
-                if (offer.offerType == SpecialOfferType.ThreeForTwo) {
+                if (isThreeForTwoOffer(offer)) {
                     x = 3;
 
                 } else if (offer.offerType == SpecialOfferType.TwoForAmount) {
@@ -57,7 +55,7 @@ public class ShoppingCart {
                     x = 5;
                 }
                 int numberOfXs = quantityAsInt / x;
-                if (offer.offerType == SpecialOfferType.ThreeForTwo && quantityAsInt > 2) {
+                if (isThreeForTwoOffer(offer) && quantityAsInt > 2) {
                     double discountAmount = quantity * unitPrice - ((numberOfXs * 2 * unitPrice) + quantityAsInt % 3 * unitPrice);
                     discount = new Discount(p, "3 for 2", -discountAmount);
                 }
@@ -73,5 +71,9 @@ public class ShoppingCart {
             }
 
         }
+    }
+
+    private boolean isThreeForTwoOffer(Offer offer) {
+        return offer.offerType == SpecialOfferType.ThreeForTwo;
     }
 }

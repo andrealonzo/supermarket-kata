@@ -12,7 +12,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SupermarketTest {
 
-    // Todo: test all kinds of discounts are applied properly
     private SupermarketCatalog catalog;
 
     private Teller teller;
