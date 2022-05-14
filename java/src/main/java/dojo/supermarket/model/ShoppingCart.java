@@ -42,11 +42,8 @@ public class ShoppingCart {
             if (productOfferMap.containsKey(product)) {
                 Offer offer = productOfferMap.get(product);
                 double unitPrice = catalog.getUnitPrice(product);
-                int quantityAsEaches = (int) quantityInWeight;
-                int numItemsInDiscount = getNumItemsInOffer(offer);
                 DiscountBook discountBook = new DiscountBook();
-                Discount discount = discountBook.getDiscount(product, quantityInWeight, offer, unitPrice, quantityAsEaches, numItemsInDiscount);
-
+                Discount discount = discountBook.getDiscount(product, quantityInWeight, offer, unitPrice);
                if (isNoDiscountOffer(discount))
                     receipt.addDiscount(discount);
             }
@@ -54,21 +51,6 @@ public class ShoppingCart {
         }
     }
 
-
-    private int getNumItemsInOffer(Offer offer){
-
-        DiscountValidator discountValidator = new DiscountValidator(offer);
-        int numItemsInDiscount = 1;
-        if (discountValidator.isThreeForTwoOffer()) {
-            numItemsInDiscount = 3;
-        } else if (discountValidator.isTwoForAmountOffer()) {
-            numItemsInDiscount = 2;
-
-        } if (discountValidator.isFiveForAmountOffer()) {
-            numItemsInDiscount = 5;
-        }
-        return numItemsInDiscount;
-    }
 
     private boolean isNoDiscountOffer(Discount discount) {
         return discount != null;

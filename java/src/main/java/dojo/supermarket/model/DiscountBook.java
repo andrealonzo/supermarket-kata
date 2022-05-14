@@ -2,23 +2,25 @@ package dojo.supermarket.model;
 
 public class DiscountBook {
 
-    public  Discount getDiscount(Product p, double quantity, Offer offer, double unitPrice, int quantityAsInt, int numItemsInDiscount) {
+    public  Discount getDiscount(Product p, double quantityInWeight, Offer offer, double unitPrice) {
+        int numItemsInDiscount = getNumItemsInOffer(offer);
+        int quantityAsEaches = (int) quantityInWeight;
         Discount discount = null;
 
-        if (canTwoForAmountOfferBeApplied(offer, quantityAsInt)){
-            discount = getTwoForAmountDiscount(p, quantity, offer, unitPrice, quantityAsInt, numItemsInDiscount);
+        if (canTwoForAmountOfferBeApplied(offer, quantityAsEaches)){
+            discount = getTwoForAmountDiscount(p, quantityInWeight, offer, unitPrice, quantityAsEaches, numItemsInDiscount);
         }
 
-        int numberOfXs = quantityAsInt / numItemsInDiscount;
-        if (canThreeForTwoOfferBeApplied(offer, quantityAsInt)) {
-            discount = getThreeForTwoDiscount(p, quantity, unitPrice, quantityAsInt, numberOfXs);
+        int numberOfXs = quantityAsEaches / numItemsInDiscount;
+        if (canThreeForTwoOfferBeApplied(offer, quantityAsEaches)) {
+            discount = getThreeForTwoDiscount(p, quantityInWeight, unitPrice, quantityAsEaches, numberOfXs);
         }
         DiscountValidator discountValidator = new DiscountValidator(offer);
         if (discountValidator.isTenPercentDiscountOffer()) {
-            discount = getTenPercentDiscount(p, quantity, offer, unitPrice);
+            discount = getTenPercentDiscount(p, quantityInWeight, offer, unitPrice);
         }
-        if (canFiveForAmountOfferBeApplied(offer, quantityAsInt)) {
-            discount = getFiveForAmountDiscount(p, quantity, offer, unitPrice, quantityAsInt, numItemsInDiscount, numberOfXs);
+        if (canFiveForAmountOfferBeApplied(offer, quantityAsEaches)) {
+            discount = getFiveForAmountDiscount(p, quantityInWeight, offer, unitPrice, quantityAsEaches, numItemsInDiscount, numberOfXs);
         }
         return discount;
     }
@@ -64,5 +66,20 @@ public class DiscountBook {
         double discountN = unitPrice * quantity - total;
         Discount discount = new Discount(p, "2 for " + offer.price, -discountN);
         return discount;
+    }
+
+    private int getNumItemsInOffer(Offer offer){
+
+        DiscountValidator discountValidator = new DiscountValidator(offer);
+        int numItemsInDiscount = 1;
+        if (discountValidator.isThreeForTwoOffer()) {
+            numItemsInDiscount = 3;
+        } else if (discountValidator.isTwoForAmountOffer()) {
+            numItemsInDiscount = 2;
+
+        } if (discountValidator.isFiveForAmountOffer()) {
+            numItemsInDiscount = 5;
+        }
+        return numItemsInDiscount;
     }
 }
