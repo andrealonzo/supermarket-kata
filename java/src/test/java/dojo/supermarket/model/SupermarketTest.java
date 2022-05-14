@@ -22,8 +22,6 @@ public class SupermarketTest {
         catalog = new FakeCatalog();
         teller = new Teller(catalog);
         cart = new ShoppingCart();
-
-
     }
     @Test
     public void testNoDiscount() {
@@ -159,6 +157,45 @@ public class SupermarketTest {
         assertEquals(1.99, receiptItem.getPrice());
         assertEquals(2.5 * 1.99, receiptItem.getTotalPrice());
         assertEquals(2.5, receiptItem.getQuantity());
+
+    }
+
+    @Test
+    public void addItemsMultipleTimes() {
+        Product product = new Product("toothbrush", ProductUnit.Each);
+        catalog.addProduct(product, 0.99);
+        cart.addItemQuantity(product, 1);
+        cart.addItemQuantity(product, 2);
+
+        Receipt receipt = teller.checksOutArticlesFrom(cart);
+
+        assertEquals(2.97, receipt.getTotalPrice(), 0.01);
+
+    }
+
+    @Test
+    public void threeForTwoDiscount() {
+        Product product = new Product("toothbrush", ProductUnit.Each);
+        catalog.addProduct(product, 0.99);
+        cart.addItemQuantity(product, 1);
+        cart.addItemQuantity(product, 2);
+        teller.addSpecialOffer(SpecialOfferType.ThreeForTwo, product, 0);
+
+        Receipt receipt = teller.checksOutArticlesFrom(cart);
+
+        assertEquals(1.98, receipt.getTotalPrice(), 0.01);
+
+    }
+    @Test
+    public void fiveForAmountDiscount() {
+        Product product = new Product("toothbrush", ProductUnit.Each);
+        catalog.addProduct(product, 0.99);
+        cart.addItemQuantity(product, 5);
+        teller.addSpecialOffer(SpecialOfferType.FiveForAmount, product, 2.99);
+
+        Receipt receipt = teller.checksOutArticlesFrom(cart);
+
+        assertEquals(2.99, receipt.getTotalPrice(), 0.01);
 
     }
 
