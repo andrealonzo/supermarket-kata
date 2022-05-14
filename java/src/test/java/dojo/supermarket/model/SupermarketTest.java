@@ -87,7 +87,6 @@ public class SupermarketTest {
 
 
         Offer offer = new FiveForAmountOffer(product, 10.0);
-    //    Offer offer = new Offer(OfferType.FiveForAmount, product, 7.49);
         teller.addOffer(offer);
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
