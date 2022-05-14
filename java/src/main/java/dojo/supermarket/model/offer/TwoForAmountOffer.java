@@ -11,7 +11,8 @@ public class TwoForAmountOffer extends Offer{
     }
 
     @Override
-    public boolean canBeApplied(Offer offer, int quantity) {
+    public boolean canBeApplied(Offer offer, double quantityAsWeight) {
+        int quantity = (int)quantityAsWeight;
         DiscountValidator discountValidator = new DiscountValidator(offer);
         return discountValidator.isTwoForAmountOffer() && quantity >= 2;
     }

@@ -11,10 +11,8 @@ public class OfferBook {
     public Discount getDiscount(SupermarketCatalog catalog, Product product, double quantityInWeight, Offer offer) {
 
         double unitPrice = catalog.getUnitPrice(product);
-        int quantityAsEaches = (int) quantityInWeight;
         Discount discount = null;
-
-        if(offer.canBeApplied(offer, quantityAsEaches)){
+        if(offer.canBeApplied(offer, quantityInWeight)){
             discount = offer.getDiscountAmount(product, quantityInWeight, unitPrice);
         }
         return discount;

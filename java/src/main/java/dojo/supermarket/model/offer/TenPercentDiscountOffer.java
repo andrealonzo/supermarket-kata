@@ -11,7 +11,7 @@ public class TenPercentDiscountOffer extends Offer{
     }
 
     @Override
-    public boolean canBeApplied(Offer offer, int quantityAsEaches) {
+    public boolean canBeApplied(Offer offer, double quantityAsWeight) {
         DiscountValidator discountValidator = new DiscountValidator(offer);
         return discountValidator.isTenPercentDiscountOffer();
     }
