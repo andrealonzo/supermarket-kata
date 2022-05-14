@@ -6,11 +6,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ShoppingCartTest {
 
-
     @Test
     public void newShoppingCartIsEmpty(){
         ShoppingCart cart = new ShoppingCart();
-        assertTrue(cart.getProducts().isEmpty());
+        assertTrue(cart.getProductQuantitiesMap().isEmpty());
     }
 
 }

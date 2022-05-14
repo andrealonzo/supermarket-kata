@@ -3,6 +3,7 @@ package dojo.supermarket.model;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class Teller {
 
@@ -19,13 +20,13 @@ public class Teller {
 
     public Receipt checksOutArticlesFrom(ShoppingCart theCart) {
         Receipt receipt = new Receipt();
-        List<ProductQuantity> productQuantities = theCart.getProducts();
-        for (ProductQuantity pq: productQuantities) {
-            Product p = pq.getProduct();
-            double quantity = pq.getQuantity();
-            double unitPrice = this.catalog.getUnitPrice(p);
+
+        Set<Product> productQuantities = theCart.getProductQuantitiesMap().keySet();
+        for (Product product: productQuantities) {
+            double quantity = theCart.getProductQuantitiesMap().get(product);
+            double unitPrice = this.catalog.getUnitPrice(product);
             double price = quantity * unitPrice;
-            receipt.addProduct(p, quantity, unitPrice, price);
+            receipt.addProduct(product, quantity, unitPrice, price);
         }
         theCart.addReceiptDiscounts(receipt, this.offers, this.catalog);
 

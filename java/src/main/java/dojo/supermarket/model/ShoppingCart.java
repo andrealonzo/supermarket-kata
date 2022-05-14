@@ -11,20 +11,13 @@ public class ShoppingCart {
     TODO:  Make TenPercentDiscount into PercentDiscount.  Make test to have 20% discount.
     TODO:  Make ThreeForTwo into NumForNumDiscount.  Make test to have FourForThree.
     */
-    private final List<ProductQuantity> productQuantities = new ArrayList<>();
     private Map<Product, Double> productQuantitiesMap = new HashMap<>();
-
-
-    public List<ProductQuantity> getProducts() {
-        return new ArrayList<>(productQuantities);
-    }
 
     public Map<Product, Double> getProductQuantitiesMap() {
         return productQuantitiesMap;
     }
 
     public void addProductQuantity(Product product, double quantity) {
-        productQuantities.add(new ProductQuantity(product, quantity));
         if (productQuantitiesMap.containsKey(product)) {
             productQuantitiesMap.put(product, productQuantitiesMap.get(product) + quantity);
         } else {
