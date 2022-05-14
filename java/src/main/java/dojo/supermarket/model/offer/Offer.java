@@ -4,12 +4,12 @@ import dojo.supermarket.model.Product;
 import dojo.supermarket.model.discount.Discount;
 
 public abstract class Offer {
-    private OfferType offerType;
+    //private OfferType offerType;
     private final Product product;
     private double price;
 
-    public Offer(OfferType offerType, Product product, double price) {
-        this.offerType = offerType;
+    public Offer(Product product, double price) {
+    //    this.offerType = offerType;
         this.price = price;
         this.product = product;
     }

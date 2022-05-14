@@ -6,7 +6,7 @@ import dojo.supermarket.model.discount.Discount;
 public class TenPercentDiscountOffer extends Offer{
 
     public TenPercentDiscountOffer(Product product, double price) {
-        super(OfferType.TenPercentDiscount, product, price);
+        super(product, price);
     }
 
     @Override

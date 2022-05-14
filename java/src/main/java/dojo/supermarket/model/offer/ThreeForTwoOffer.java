@@ -8,7 +8,7 @@ public class ThreeForTwoOffer extends Offer{
     public static final int NUM_ITEMS_IN_OFFER = 3;
 
     public ThreeForTwoOffer(Product product, double price) {
-        super(OfferType.ThreeForTwo, product, price);
+        super(product, price);
     }
 
     @Override
