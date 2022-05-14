@@ -1,8 +1,5 @@
 package dojo.supermarket.model;
 
-import dojo.supermarket.ReceiptPrinter;
-import org.approvaltests.Approvals;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -27,7 +24,7 @@ public class SupermarketTest {
         Product toothbrush = new Product("toothbrush", ProductUnit.Each);
         catalog.addProduct(toothbrush, 0.99);
 
-        cart.addItemQuantity(toothbrush, 1);
+        cart.addProductQuantity(toothbrush, 1);
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
 
@@ -40,7 +37,7 @@ public class SupermarketTest {
         Product product = new Product("apple", ProductUnit.Kilo);
         catalog.addProduct(product, 1.99);
 
-        cart.addItemQuantity(product, 1);
+        cart.addProductQuantity(product, 1);
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
 
@@ -53,7 +50,7 @@ public class SupermarketTest {
         Product product = new Product("apple", ProductUnit.Kilo);
         catalog.addProduct(product, 1.99);
 
-        cart.addItemQuantity(product, 1);
+        cart.addProductQuantity(product, 1);
         teller.addSpecialOffer(SpecialOfferType.TenPercentDiscount, product, 10.0);
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
@@ -67,7 +64,7 @@ public class SupermarketTest {
         Product product = new Product("rice", ProductUnit.Kilo);
         catalog.addProduct(product, 2.49);
 
-        cart.addItemQuantity(product, 1);
+        cart.addProductQuantity(product, 1);
         teller.addSpecialOffer(SpecialOfferType.TenPercentDiscount, product, 10.0);
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
@@ -79,7 +76,7 @@ public class SupermarketTest {
 
         Product product = new Product("rice", ProductUnit.Kilo);
         catalog.addProduct(product, 2.49);
-        cart.addItemQuantity(product, 1);
+        cart.addProductQuantity(product, 1);
         teller.addSpecialOffer(SpecialOfferType.FiveForAmount, product, 7.49);
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
@@ -91,7 +88,7 @@ public class SupermarketTest {
 
         Product product = new Product("toothpaste", ProductUnit.Each);
         catalog.addProduct(product, 1.79);
-        cart.addItemQuantity(product, 5);
+        cart.addProductQuantity(product, 5);
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
 
@@ -103,7 +100,7 @@ public class SupermarketTest {
 
         Product product = new Product("toothpaste", ProductUnit.Each);
         catalog.addProduct(product, 1.79);
-        cart.addItemQuantity(product, 4);
+        cart.addProductQuantity(product, 4);
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
 
@@ -115,7 +112,7 @@ public class SupermarketTest {
 
         Product product = new Product("tomato", ProductUnit.Each);
         catalog.addProduct(product, .69);
-        cart.addItemQuantity(product, 2);
+        cart.addProductQuantity(product, 2);
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
 
@@ -126,7 +123,7 @@ public class SupermarketTest {
 
         Product product = new Product("tomato", ProductUnit.Each);
         catalog.addProduct(product, .69);
-        cart.addItemQuantity(product, 2);
+        cart.addProductQuantity(product, 2);
         teller.addSpecialOffer(SpecialOfferType.TwoForAmount, product, .99);
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
@@ -142,7 +139,7 @@ public class SupermarketTest {
 
         teller.addSpecialOffer(SpecialOfferType.TenPercentDiscount, toothbrush, 10.0);
 
-        cart.addItemQuantity(apples, 2.5);
+        cart.addProductQuantity(apples, 2.5);
 
         // ACT
         Receipt receipt = teller.checksOutArticlesFrom(cart);
@@ -163,8 +160,8 @@ public class SupermarketTest {
     public void addItemsMultipleTimes() {
         Product product = new Product("toothbrush", ProductUnit.Each);
         catalog.addProduct(product, 0.99);
-        cart.addItemQuantity(product, 1);
-        cart.addItemQuantity(product, 2);
+        cart.addProductQuantity(product, 1);
+        cart.addProductQuantity(product, 2);
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
 
@@ -176,8 +173,8 @@ public class SupermarketTest {
     public void threeForTwoDiscount() {
         Product product = new Product("toothbrush", ProductUnit.Each);
         catalog.addProduct(product, 0.99);
-        cart.addItemQuantity(product, 1);
-        cart.addItemQuantity(product, 2);
+        cart.addProductQuantity(product, 1);
+        cart.addProductQuantity(product, 2);
         teller.addSpecialOffer(SpecialOfferType.ThreeForTwo, product, 0);
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
@@ -189,7 +186,7 @@ public class SupermarketTest {
     public void fiveForAmountDiscount() {
         Product product = new Product("toothbrush", ProductUnit.Each);
         catalog.addProduct(product, 0.99);
-        cart.addItemQuantity(product, 5);
+        cart.addProductQuantity(product, 5);
         teller.addSpecialOffer(SpecialOfferType.FiveForAmount, product, 2.99);
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);

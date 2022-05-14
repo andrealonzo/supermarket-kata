@@ -2,25 +2,27 @@ package dojo.supermarket.model;
 
 public class DiscountBook {
 
-    public  Discount getDiscount(Product p, double quantityInWeight, Offer offer, double unitPrice) {
+    public  Discount getDiscount(SupermarketCatalog catalog, Product product, double quantityInWeight, Offer offer) {
+
+        double unitPrice = catalog.getUnitPrice(product);
         int numItemsInDiscount = getNumItemsInOffer(offer);
         int quantityAsEaches = (int) quantityInWeight;
         Discount discount = null;
 
         if (canTwoForAmountOfferBeApplied(offer, quantityAsEaches)){
-            discount = getTwoForAmountDiscount(p, quantityInWeight, offer, unitPrice, quantityAsEaches, numItemsInDiscount);
+            discount = getTwoForAmountDiscount(product, quantityInWeight, offer, unitPrice, quantityAsEaches, numItemsInDiscount);
         }
 
         int numberOfXs = quantityAsEaches / numItemsInDiscount;
         if (canThreeForTwoOfferBeApplied(offer, quantityAsEaches)) {
-            discount = getThreeForTwoDiscount(p, quantityInWeight, unitPrice, quantityAsEaches, numberOfXs);
+            discount = getThreeForTwoDiscount(product, quantityInWeight, unitPrice, quantityAsEaches, numberOfXs);
         }
         DiscountValidator discountValidator = new DiscountValidator(offer);
         if (discountValidator.isTenPercentDiscountOffer()) {
-            discount = getTenPercentDiscount(p, quantityInWeight, offer, unitPrice);
+            discount = getTenPercentDiscount(product, quantityInWeight, offer, unitPrice);
         }
         if (canFiveForAmountOfferBeApplied(offer, quantityAsEaches)) {
-            discount = getFiveForAmountDiscount(p, quantityInWeight, offer, unitPrice, quantityAsEaches, numItemsInDiscount, numberOfXs);
+            discount = getFiveForAmountDiscount(product, quantityInWeight, offer, unitPrice, quantityAsEaches, numItemsInDiscount, numberOfXs);
         }
         return discount;
     }

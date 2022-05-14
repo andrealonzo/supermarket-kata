@@ -11,49 +11,39 @@ public class ShoppingCart {
     TODO:  Make TenPercentDiscount into PercentDiscount.  Make test to have 20% discount.
     TODO:  Make ThreeForTwo into NumForNumDiscount.  Make test to have FourForThree.
     */
-    private final List<ProductQuantity> items = new ArrayList<>();
-    private Map<Product, Double> productQuantities = new HashMap<>();
+    private final List<ProductQuantity> productQuantities = new ArrayList<>();
+    private Map<Product, Double> productQuantitiesMap = new HashMap<>();
 
 
-    public List<ProductQuantity> getItems() {
-        return new ArrayList<>(items);
+    public List<ProductQuantity> getProducts() {
+        return new ArrayList<>(productQuantities);
     }
 
-    public void addItem(Product product) {
-        this.addItemQuantity(product, 1.0);
+    public Map<Product, Double> getProductQuantitiesMap() {
+        return productQuantitiesMap;
     }
 
-    public Map<Product, Double> productQuantities() {
-        return productQuantities;
-    }
-
-    public void addItemQuantity(Product product, double quantity) {
-        items.add(new ProductQuantity(product, quantity));
-        if (productQuantities.containsKey(product)) {
-            productQuantities.put(product, productQuantities.get(product) + quantity);
+    public void addProductQuantity(Product product, double quantity) {
+        productQuantities.add(new ProductQuantity(product, quantity));
+        if (productQuantitiesMap.containsKey(product)) {
+            productQuantitiesMap.put(product, productQuantitiesMap.get(product) + quantity);
         } else {
-            productQuantities.put(product, quantity);
+            productQuantitiesMap.put(product, quantity);
         }
     }
 
-    void handleOffers(Receipt receipt, Map<Product, Offer> productOfferMap, SupermarketCatalog catalog) {
-        for (Product product: productQuantities().keySet()) {
-            double quantityInWeight = productQuantities.get(product);
+    void addReceiptDiscounts(Receipt receipt, Map<Product, Offer> productOfferMap, SupermarketCatalog catalog) {
+        for (Product product: getProductQuantitiesMap().keySet()) {
+            double quantityInWeight = productQuantitiesMap.get(product);
             if (productOfferMap.containsKey(product)) {
                 Offer offer = productOfferMap.get(product);
-                double unitPrice = catalog.getUnitPrice(product);
                 DiscountBook discountBook = new DiscountBook();
-                Discount discount = discountBook.getDiscount(product, quantityInWeight, offer, unitPrice);
-               if (isNoDiscountOffer(discount))
+                Discount discount = discountBook.getDiscount(catalog, product, quantityInWeight, offer);
+               if (discount != null)
                     receipt.addDiscount(discount);
             }
 
         }
-    }
-
-
-    private boolean isNoDiscountOffer(Discount discount) {
-        return discount != null;
     }
 
 
