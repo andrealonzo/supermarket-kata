@@ -11,8 +11,8 @@ public class Offer {
         this.product = product;
     }
 
-    Product getProduct() {
-        return this.product;
-    }
+//    Product getProduct() {
+//        return this.product;
+//    }
 
 }

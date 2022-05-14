@@ -13,6 +13,23 @@ public class SupermarketTest {
     // Todo: test all kinds of discounts are applied properly
 
     @Test
+    public void testNoDiscount() {
+
+        SupermarketCatalog catalog = new FakeCatalog();
+
+        Product toothbrush = new Product("toothbrush", ProductUnit.Each);
+        catalog.addProduct(toothbrush, 0.99);
+        ShoppingCart cart = new ShoppingCart();
+
+        cart.addItemQuantity(toothbrush, 1);
+
+        Teller teller = new Teller(catalog);
+        Receipt receipt = teller.checksOutArticlesFrom(cart);
+
+        assertEquals(.99, receipt.getTotalPrice(), 0.01);
+    }
+
+    @Test
     public void tenPercentDiscount() {
         SupermarketCatalog catalog = new FakeCatalog();
         Product toothbrush = new Product("toothbrush", ProductUnit.Each);
@@ -25,7 +42,8 @@ public class SupermarketTest {
 
         ShoppingCart cart = new ShoppingCart();
         cart.addItemQuantity(apples, 2.5);
-        
+
+
         // ACT
         Receipt receipt = teller.checksOutArticlesFrom(cart);
 
@@ -36,7 +54,7 @@ public class SupermarketTest {
         ReceiptItem receiptItem = receipt.getItems().get(0);
         assertEquals(apples, receiptItem.getProduct());
         assertEquals(1.99, receiptItem.getPrice());
-        assertEquals(2.5*1.99, receiptItem.getTotalPrice());
+        assertEquals(2.5 * 1.99, receiptItem.getTotalPrice());
         assertEquals(2.5, receiptItem.getQuantity());
 
     }
