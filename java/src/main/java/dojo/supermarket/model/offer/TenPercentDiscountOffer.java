@@ -4,7 +4,7 @@ import dojo.supermarket.model.Product;
 
 public class TenPercentDiscountOffer extends Offer{
 
-    public TenPercentDiscountOffer(SpecialOfferType offerType, Product product, double price) {
-        super(offerType, product, price);
+    public TenPercentDiscountOffer(Product product, double price) {
+        super(OfferType.TenPercentDiscount, product, price);
     }
 }

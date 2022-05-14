@@ -1,7 +1,7 @@
 package dojo.supermarket.model.discount;
 
 import dojo.supermarket.model.offer.Offer;
-import dojo.supermarket.model.offer.SpecialOfferType;
+import dojo.supermarket.model.offer.OfferType;
 
 public class DiscountValidator {
 
@@ -12,21 +12,21 @@ public class DiscountValidator {
     }
 
     public boolean isTenPercentDiscountOffer() {
-        return offer.getOfferType() == SpecialOfferType.TenPercentDiscount;
+        return offer.getOfferType() == OfferType.TenPercentDiscount;
     }
 
     public boolean isNumForAmountOffer() {
-        return offer.getOfferType() == SpecialOfferType.FiveForAmount;
+        return offer.getOfferType() == OfferType.FiveForAmount;
     }
 //    public boolean isFiveForAmountOffer() {
 //        return offer.getOfferType() == SpecialOfferType.FiveForAmount;
 //    }
 
     public boolean isTwoForAmountOffer() {
-        return offer.getOfferType() == SpecialOfferType.TwoForAmount;
+        return offer.getOfferType() == OfferType.TwoForAmount;
     }
 
     public boolean isThreeForTwoOffer() {
-        return offer.getOfferType() == SpecialOfferType.ThreeForTwo;
+        return offer.getOfferType() == OfferType.ThreeForTwo;
     }
 }

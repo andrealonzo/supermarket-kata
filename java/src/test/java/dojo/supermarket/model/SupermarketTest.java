@@ -1,7 +1,6 @@
 package dojo.supermarket.model;
 
-import dojo.supermarket.model.offer.Offer;
-import dojo.supermarket.model.offer.SpecialOfferType;
+import dojo.supermarket.model.offer.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -54,7 +53,7 @@ public class SupermarketTest {
 
         cart.addProductQuantity(product, 1);
 
-        Offer offer = new Offer(SpecialOfferType.TenPercentDiscount, product, 10.0);
+        Offer offer = new Offer(OfferType.TenPercentDiscount, product, 10.0);
         teller.addOffer(offer);
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
@@ -69,7 +68,7 @@ public class SupermarketTest {
         catalog.addProduct(product, 2.49);
 
         cart.addProductQuantity(product, 1);
-        Offer offer = new Offer(SpecialOfferType.TenPercentDiscount, product, 10.0);
+        Offer offer = new Offer(OfferType.TenPercentDiscount, product, 10.0);
 
         teller.addOffer(offer);
 
@@ -84,7 +83,7 @@ public class SupermarketTest {
         catalog.addProduct(product, 2.49);
         cart.addProductQuantity(product, 1);
 
-        Offer offer = new Offer(SpecialOfferType.FiveForAmount, product, 7.49);
+        Offer offer = new Offer(OfferType.FiveForAmount, product, 7.49);
         teller.addOffer(offer);
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
@@ -133,7 +132,7 @@ public class SupermarketTest {
         catalog.addProduct(product, .69);
         cart.addProductQuantity(product, 2);
 
-        Offer offer = new Offer(SpecialOfferType.TwoForAmount, product, .99);
+        Offer offer = new Offer(OfferType.TwoForAmount, product, .99);
         teller.addOffer(offer);
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
@@ -147,7 +146,9 @@ public class SupermarketTest {
         Product apples = new Product("apples", ProductUnitType.Kilo);
         catalog.addProduct(apples, 1.99);
 
-        Offer offer = new Offer(SpecialOfferType.TenPercentDiscount, toothbrush, 10.0);
+       // Offer offer = new Offer(SpecialOfferType.TenPercentDiscount, toothbrush, 10.0);
+        Offer offer = new TenPercentDiscountOffer(toothbrush, 10.0);
+
         teller.addOffer(offer);
 
         cart.addProductQuantity(apples, 2.5);
@@ -186,7 +187,7 @@ public class SupermarketTest {
         catalog.addProduct(product, 0.99);
         cart.addProductQuantity(product, 1);
         cart.addProductQuantity(product, 2);
-        Offer offer = new Offer(SpecialOfferType.ThreeForTwo, product, 0);
+        Offer offer = new ThreeForTwoOffer(product, 0);
 
         teller.addOffer(offer);
 
@@ -200,7 +201,7 @@ public class SupermarketTest {
         Product product = new Product("toothbrush", ProductUnitType.Each);
         catalog.addProduct(product, 0.99);
         cart.addProductQuantity(product, 5);
-        Offer offer = new Offer(SpecialOfferType.FiveForAmount, product, 2.99);
+        Offer offer = new FiveForAmountOffer(product, 2.99);
         teller.addOffer(offer);
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
@@ -214,7 +215,7 @@ public class SupermarketTest {
         Product product = new Product("toothbrush", ProductUnitType.Each);
         catalog.addProduct(product, 0.99);
         cart.addProductQuantity(product, 4);
-        Offer offer = new Offer(SpecialOfferType.FiveForAmount, product, 2.99);
+        Offer offer = new FiveForAmountOffer(product, 2.99);
         teller.addOffer(offer);
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
