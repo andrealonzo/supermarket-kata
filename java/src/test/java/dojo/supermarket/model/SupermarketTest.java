@@ -22,7 +22,7 @@ public class SupermarketTest {
     }
     @Test
     public void testNoDiscount() {
-        Product toothbrush = new Product("toothbrush", ProductUnit.Each);
+        Product toothbrush = new Product("toothbrush", ProductUnitType.Each);
         catalog.addProduct(toothbrush, 0.99);
 
         cart.addProductQuantity(toothbrush, 1);
@@ -35,7 +35,7 @@ public class SupermarketTest {
     @Test
     public void noDiscountOnKiloItem(){
 
-        Product product = new Product("apple", ProductUnit.Kilo);
+        Product product = new Product("apple", ProductUnitType.Kilo);
         catalog.addProduct(product, 1.99);
 
         cart.addProductQuantity(product, 1);
@@ -48,7 +48,7 @@ public class SupermarketTest {
     @Test
     public void percentDiscountOnKiloItem(){
 
-        Product product = new Product("apple", ProductUnit.Kilo);
+        Product product = new Product("apple", ProductUnitType.Kilo);
         catalog.addProduct(product, 1.99);
 
         cart.addProductQuantity(product, 1);
@@ -62,7 +62,7 @@ public class SupermarketTest {
     @Test
     public void percentDiscountOnEachItem(){
 
-        Product product = new Product("rice", ProductUnit.Kilo);
+        Product product = new Product("rice", ProductUnitType.Kilo);
         catalog.addProduct(product, 2.49);
 
         cart.addProductQuantity(product, 1);
@@ -75,7 +75,7 @@ public class SupermarketTest {
     @Test
     public void noDiscountOnEachItem(){
 
-        Product product = new Product("rice", ProductUnit.Kilo);
+        Product product = new Product("rice", ProductUnitType.Kilo);
         catalog.addProduct(product, 2.49);
         cart.addProductQuantity(product, 1);
         teller.addSpecialOffer(SpecialOfferType.FiveForAmount, product, 7.49);
@@ -87,7 +87,7 @@ public class SupermarketTest {
     @Test
     public void fiveToothpasteNoDiscount(){
 
-        Product product = new Product("toothpaste", ProductUnit.Each);
+        Product product = new Product("toothpaste", ProductUnitType.Each);
         catalog.addProduct(product, 1.79);
         cart.addProductQuantity(product, 5);
 
@@ -99,7 +99,7 @@ public class SupermarketTest {
     @Test
     public void fiveToothpasteHasDiscount(){
 
-        Product product = new Product("toothpaste", ProductUnit.Each);
+        Product product = new Product("toothpaste", ProductUnitType.Each);
         catalog.addProduct(product, 1.79);
         cart.addProductQuantity(product, 4);
 
@@ -111,7 +111,7 @@ public class SupermarketTest {
     @Test
     public void twoCherryTomatoesNoDiscount(){
 
-        Product product = new Product("tomato", ProductUnit.Each);
+        Product product = new Product("tomato", ProductUnitType.Each);
         catalog.addProduct(product, .69);
         cart.addProductQuantity(product, 2);
 
@@ -122,7 +122,7 @@ public class SupermarketTest {
     @Test
     public void twoCherryTomatoesWithDiscount(){
 
-        Product product = new Product("tomato", ProductUnit.Each);
+        Product product = new Product("tomato", ProductUnitType.Each);
         catalog.addProduct(product, .69);
         cart.addProductQuantity(product, 2);
         teller.addSpecialOffer(SpecialOfferType.TwoForAmount, product, .99);
@@ -133,9 +133,9 @@ public class SupermarketTest {
     }
     @Test
     public void tenPercentDiscount() {
-        Product toothbrush = new Product("toothbrush", ProductUnit.Each);
+        Product toothbrush = new Product("toothbrush", ProductUnitType.Each);
         catalog.addProduct(toothbrush, 0.99);
-        Product apples = new Product("apples", ProductUnit.Kilo);
+        Product apples = new Product("apples", ProductUnitType.Kilo);
         catalog.addProduct(apples, 1.99);
 
         teller.addSpecialOffer(SpecialOfferType.TenPercentDiscount, toothbrush, 10.0);
@@ -159,7 +159,7 @@ public class SupermarketTest {
 
     @Test
     public void addItemsMultipleTimes() {
-        Product product = new Product("toothbrush", ProductUnit.Each);
+        Product product = new Product("toothbrush", ProductUnitType.Each);
         catalog.addProduct(product, 0.99);
         cart.addProductQuantity(product, 1);
         cart.addProductQuantity(product, 2);
@@ -172,7 +172,7 @@ public class SupermarketTest {
 
     @Test
     public void threeForTwoDiscount() {
-        Product product = new Product("toothbrush", ProductUnit.Each);
+        Product product = new Product("toothbrush", ProductUnitType.Each);
         catalog.addProduct(product, 0.99);
         cart.addProductQuantity(product, 1);
         cart.addProductQuantity(product, 2);
@@ -185,7 +185,7 @@ public class SupermarketTest {
     }
     @Test
     public void fiveForAmountDiscount() {
-        Product product = new Product("toothbrush", ProductUnit.Each);
+        Product product = new Product("toothbrush", ProductUnitType.Each);
         catalog.addProduct(product, 0.99);
         cart.addProductQuantity(product, 5);
         teller.addSpecialOffer(SpecialOfferType.FiveForAmount, product, 2.99);

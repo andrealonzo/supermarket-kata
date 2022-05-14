@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ReceiptTest {
     @Test
     public void discountAddedMatches(){
-        Product product = new Product("name", ProductUnit.Each);
+        Product product = new Product("name", ProductUnitType.Each);
         Discount discount = new Discount(product, "name", 1.0);
         Receipt receipt = new Receipt();
         receipt.addDiscount(discount);
@@ -17,7 +17,7 @@ public class ReceiptTest {
     }
     @Test
     public void totalPriceWithDiscounts(){
-        Product product = new Product("name", ProductUnit.Each);
+        Product product = new Product("name", ProductUnitType.Each);
         Discount discount = new Discount(product, "name", 1.0);
         Receipt receipt = new Receipt();
         receipt.addDiscount(discount);

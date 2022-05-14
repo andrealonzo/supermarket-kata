@@ -1,5 +1,5 @@
 package dojo.supermarket.model;
 
-public enum ProductUnit {
+public enum ProductUnitType {
     Kilo, Each
 }
