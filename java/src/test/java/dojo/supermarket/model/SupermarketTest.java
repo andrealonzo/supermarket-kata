@@ -40,17 +40,102 @@ public class SupermarketTest {
     @Test
     public void noDiscountOnKiloItem(){
 
-        Product toothbrush = new Product("apple", ProductUnit.Kilo);
-        catalog.addProduct(toothbrush, 1.99);
+        Product product = new Product("apple", ProductUnit.Kilo);
+        catalog.addProduct(product, 1.99);
 
-        cart.addItemQuantity(toothbrush, 1);
+        cart.addItemQuantity(product, 1);
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
 
         assertEquals(1.99, receipt.getTotalPrice(), 0.01);
 
     }
+    @Test
+    public void percentDiscountOnKiloItem(){
 
+        Product product = new Product("apple", ProductUnit.Kilo);
+        catalog.addProduct(product, 1.99);
+
+        cart.addItemQuantity(product, 1);
+        teller.addSpecialOffer(SpecialOfferType.TenPercentDiscount, product, 10.0);
+
+        Receipt receipt = teller.checksOutArticlesFrom(cart);
+
+        assertEquals(1.79, receipt.getTotalPrice(), 0.01);
+
+    }
+    @Test
+    public void percentDiscountOnEachItem(){
+
+        Product product = new Product("rice", ProductUnit.Kilo);
+        catalog.addProduct(product, 2.49);
+
+        cart.addItemQuantity(product, 1);
+        teller.addSpecialOffer(SpecialOfferType.TenPercentDiscount, product, 10.0);
+
+        Receipt receipt = teller.checksOutArticlesFrom(cart);
+
+        assertEquals(2.24, receipt.getTotalPrice(), 0.01);
+    }
+    @Test
+    public void noDiscountOnEachItem(){
+
+        Product product = new Product("rice", ProductUnit.Kilo);
+        catalog.addProduct(product, 2.49);
+        cart.addItemQuantity(product, 1);
+        teller.addSpecialOffer(SpecialOfferType.FiveForAmount, product, 7.49);
+
+        Receipt receipt = teller.checksOutArticlesFrom(cart);
+
+        assertEquals(2.49, receipt.getTotalPrice(), 0.01);
+    }
+    @Test
+    public void fiveToothpasteNoDiscount(){
+
+        Product product = new Product("toothpaste", ProductUnit.Each);
+        catalog.addProduct(product, 1.79);
+        cart.addItemQuantity(product, 5);
+
+        Receipt receipt = teller.checksOutArticlesFrom(cart);
+
+        assertEquals(8.95, receipt.getTotalPrice(), 0.01);
+    }
+
+    @Test
+    public void fiveToothpasteHasDiscount(){
+
+        Product product = new Product("toothpaste", ProductUnit.Each);
+        catalog.addProduct(product, 1.79);
+        cart.addItemQuantity(product, 4);
+
+        Receipt receipt = teller.checksOutArticlesFrom(cart);
+
+        assertEquals(7.16, receipt.getTotalPrice(), 0.01);
+    }
+
+    @Test
+    public void twoCherryTomatoesNoDiscount(){
+
+        Product product = new Product("tomato", ProductUnit.Each);
+        catalog.addProduct(product, .69);
+        cart.addItemQuantity(product, 2);
+
+        Receipt receipt = teller.checksOutArticlesFrom(cart);
+
+        assertEquals(1.38, receipt.getTotalPrice(), 0.01);
+    }
+    @Test
+    public void twoCherryTomatoesWithDiscount(){
+
+        Product product = new Product("tomato", ProductUnit.Each);
+        catalog.addProduct(product, .69);
+        cart.addItemQuantity(product, 2);
+        teller.addSpecialOffer(SpecialOfferType.TwoForAmount, product, .99);
+
+        Receipt receipt = teller.checksOutArticlesFrom(cart);
+
+        assertEquals(.99, receipt.getTotalPrice(), 0.01);
+    }
     @Test
     public void tenPercentDiscount() {
         Product toothbrush = new Product("toothbrush", ProductUnit.Each);
