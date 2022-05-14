@@ -7,29 +7,13 @@ import dojo.supermarket.model.SupermarketCatalog;
 
 public class OfferBook {
 
+    public Discount getDiscount(double pricePerUnit, Product product, double quantity, Offer offer) {
 
-    public Discount getDiscount(SupermarketCatalog catalog, Product product, double quantityInWeight, Offer offer) {
-
-        double unitPrice = catalog.getUnitPrice(product);
         Discount discount = null;
-        if(offer.canBeApplied(offer, quantityInWeight)){
-            discount = offer.getDiscountAmount(product, quantityInWeight, unitPrice);
+        if(offer.canBeApplied(offer, quantity)){
+            discount = offer.getDiscountAmount(product, quantity, pricePerUnit);
         }
         return discount;
     }
 
-    private int getNumItemsInOffer(Offer offer){
-
-        DiscountValidator discountValidator = new DiscountValidator(offer);
-        int numItemsInDiscount = 1;
-        if (discountValidator.isThreeForTwoOffer()) {
-            numItemsInDiscount = 3;
-        } else if (discountValidator.isTwoForAmountOffer()) {
-            numItemsInDiscount = 2;
-
-        } if (discountValidator.isNumForAmountOffer()) {
-            numItemsInDiscount = 5;
-        }
-        return numItemsInDiscount;
-    }
 }

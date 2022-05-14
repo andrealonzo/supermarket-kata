@@ -31,7 +31,8 @@ public class ShoppingCart {
             if (productOfferMap.containsKey(product)) {
                 Offer offer = productOfferMap.get(product);
                 OfferBook offerBook = new OfferBook();
-                Discount discount = offerBook.getDiscount(catalog, product, quantityInWeight, offer);
+                double pricePerUnit = catalog.getUnitPrice(product);
+                Discount discount = offerBook.getDiscount(pricePerUnit, product, quantityInWeight, offer);
                if (discount != null)
                     receipt.addDiscount(discount);
             }
