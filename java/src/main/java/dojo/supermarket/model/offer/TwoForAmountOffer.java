@@ -2,7 +2,6 @@ package dojo.supermarket.model.offer;
 
 import dojo.supermarket.model.Product;
 import dojo.supermarket.model.discount.Discount;
-import dojo.supermarket.model.discount.DiscountValidator;
 
 public class TwoForAmountOffer extends Offer{
 
@@ -13,8 +12,7 @@ public class TwoForAmountOffer extends Offer{
     @Override
     public boolean canBeApplied(Offer offer, double quantityAsWeight) {
         int quantity = (int)quantityAsWeight;
-        DiscountValidator discountValidator = new DiscountValidator(offer);
-        return discountValidator.isTwoForAmountOffer() && quantity >= 2;
+        return quantity >= 2;
     }
 
     @Override
