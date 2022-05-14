@@ -5,6 +5,8 @@ import dojo.supermarket.model.discount.Discount;
 
 public class TwoForAmountOffer extends Offer{
 
+    public static final int NUM_ITEMS_IN_OFFER = 2;
+
     public TwoForAmountOffer(Product product, double price) {
         super(OfferType.TwoForAmount, product, price);
     }
@@ -18,9 +20,9 @@ public class TwoForAmountOffer extends Offer{
     @Override
     public Discount getDiscountAmount(Product product, double quantityInWeight, double unitPrice) {
         int quantityAsEaches = (int) quantityInWeight;
-        double total = this.getPrice() * (quantityAsEaches / getNumItemsInOffer()) + quantityAsEaches % 2 * unitPrice;
+        double total = this.getPrice() * (quantityAsEaches / NUM_ITEMS_IN_OFFER) + quantityAsEaches % 2 * unitPrice;
         double discountN = unitPrice * quantityAsEaches - total;
-        Discount discount = new Discount(product, "2 for " + this.getPrice(), -discountN);
+        Discount discount = new Discount(product, NUM_ITEMS_IN_OFFER + " for " + this.getPrice(), -discountN);
         return discount;
     }
 }
