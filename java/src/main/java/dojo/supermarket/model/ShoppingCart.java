@@ -39,22 +39,16 @@ public class ShoppingCart {
                 double unitPrice = catalog.getUnitPrice(p);
                 int quantityAsInt = (int) quantity;
                 Discount discount = null;
-                int x = 1;
-                if (isThreeForTwoOffer(offer)) {
-                    x = 3;
+                int numItemsInDiscount = getNumItemsInOffer(offer);
+                
+                if (isTwoForAmountOffer(offer)&&quantityAsInt >= 2){
+                    double total = offer.argument * (quantityAsInt / numItemsInDiscount) + quantityAsInt % 2 * unitPrice;
+                    double discountN = unitPrice * quantity - total;
+                    discount = new Discount(p, "2 for " + offer.argument, -discountN);
 
-                } else if (isTwoForAmountOffer(offer)) {
-                    x = 2;
-                    if (quantityAsInt >= 2) {
-                        double total = offer.argument * (quantityAsInt / x) + quantityAsInt % 2 * unitPrice;
-                        double discountN = unitPrice * quantity - total;
-                        discount = new Discount(p, "2 for " + offer.argument, -discountN);
-                    }
-
-                } if (isFiveForAmountOffer(offer)) {
-                    x = 5;
                 }
-                int numberOfXs = quantityAsInt / x;
+
+                int numberOfXs = quantityAsInt / numItemsInDiscount;
                 if (isThreeForTwoOffer(offer) && quantityAsInt > 2) {
                     double discountAmount = quantity * unitPrice - ((numberOfXs * 2 * unitPrice) + quantityAsInt % 3 * unitPrice);
                     discount = new Discount(p, "3 for 2", -discountAmount);
@@ -64,13 +58,27 @@ public class ShoppingCart {
                 }
                 if (isFiveForAmountOffer(offer) && quantityAsInt >= 5) {
                     double discountTotal = unitPrice * quantity - (offer.argument * numberOfXs + quantityAsInt % 5 * unitPrice);
-                    discount = new Discount(p, x + " for " + offer.argument, -discountTotal);
+                    discount = new Discount(p, numItemsInDiscount + " for " + offer.argument, -discountTotal);
                 }
                 if (isNoDiscountOffer(discount))
                     receipt.addDiscount(discount);
             }
 
         }
+    }
+
+    private int getNumItemsInOffer(Offer offer){
+
+        int numItemsInDiscount = 1;
+        if (isThreeForTwoOffer(offer)) {
+            numItemsInDiscount = 3;
+        } else if (isTwoForAmountOffer(offer)) {
+            numItemsInDiscount = 2;
+
+        } if (isFiveForAmountOffer(offer)) {
+            numItemsInDiscount = 5;
+        }
+        return numItemsInDiscount;
     }
 
     private boolean isNoDiscountOffer(Discount discount) {
