@@ -15,9 +15,9 @@ public class ShoppingCart {
         return new ArrayList<>(items);
     }
 
-//  //  void addItem(Product product) {
-//        this.addItemQuantity(product, 1.0);
-//    }
+    void addItem(Product product) {
+        this.addItemQuantity(product, 1.0);
+    }
 
     Map<Product, Double> productQuantities() {
         return productQuantities;

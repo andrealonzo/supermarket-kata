@@ -2,6 +2,8 @@ package dojo.supermarket.model;
 
 import dojo.supermarket.ReceiptPrinter;
 import org.approvaltests.Approvals;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
@@ -11,38 +13,54 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class SupermarketTest {
 
     // Todo: test all kinds of discounts are applied properly
+    private SupermarketCatalog catalog;
 
+    private Teller teller;
+    private ShoppingCart cart;
+    @BeforeEach
+    public void setupTest(){
+        catalog = new FakeCatalog();
+        teller = new Teller(catalog);
+        cart = new ShoppingCart();
+
+
+    }
     @Test
     public void testNoDiscount() {
-
-        SupermarketCatalog catalog = new FakeCatalog();
-
         Product toothbrush = new Product("toothbrush", ProductUnit.Each);
         catalog.addProduct(toothbrush, 0.99);
-        ShoppingCart cart = new ShoppingCart();
 
         cart.addItemQuantity(toothbrush, 1);
 
-        Teller teller = new Teller(catalog);
         Receipt receipt = teller.checksOutArticlesFrom(cart);
 
         assertEquals(.99, receipt.getTotalPrice(), 0.01);
     }
 
     @Test
+    public void noDiscountOnKiloItem(){
+
+        Product toothbrush = new Product("apple", ProductUnit.Kilo);
+        catalog.addProduct(toothbrush, 1.99);
+
+        cart.addItemQuantity(toothbrush, 1);
+
+        Receipt receipt = teller.checksOutArticlesFrom(cart);
+
+        assertEquals(1.99, receipt.getTotalPrice(), 0.01);
+
+    }
+
+    @Test
     public void tenPercentDiscount() {
-        SupermarketCatalog catalog = new FakeCatalog();
         Product toothbrush = new Product("toothbrush", ProductUnit.Each);
         catalog.addProduct(toothbrush, 0.99);
         Product apples = new Product("apples", ProductUnit.Kilo);
         catalog.addProduct(apples, 1.99);
 
-        Teller teller = new Teller(catalog);
         teller.addSpecialOffer(SpecialOfferType.TenPercentDiscount, toothbrush, 10.0);
 
-        ShoppingCart cart = new ShoppingCart();
         cart.addItemQuantity(apples, 2.5);
-
 
         // ACT
         Receipt receipt = teller.checksOutArticlesFrom(cart);
