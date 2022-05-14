@@ -14,6 +14,7 @@ public class ShoppingCart {
     private final List<ProductQuantity> items = new ArrayList<>();
     private Map<Product, Double> productQuantities = new HashMap<>();
 
+
     public List<ProductQuantity> getItems() {
         return new ArrayList<>(items);
     }
@@ -54,6 +55,7 @@ public class ShoppingCart {
 
     private Discount getDiscount(Product p, double quantity, Offer offer, double unitPrice, int quantityAsInt, int numItemsInDiscount) {
         Discount discount = null;
+
         if (canTwoForAmountOfferBeApplied(offer, quantityAsInt)){
             discount = getTwoForAmountDiscount(p, quantity, offer, unitPrice, quantityAsInt, numItemsInDiscount);
         }
@@ -62,7 +64,8 @@ public class ShoppingCart {
         if (canThreeForTwoOfferBeApplied(offer, quantityAsInt)) {
             discount = getThreeForTwoDiscount(p, quantity, unitPrice, quantityAsInt, numberOfXs);
         }
-        if (isTenPercentDiscountOffer(offer)) {
+        DiscountValidator discountValidator = new DiscountValidator(offer);
+        if (discountValidator.isTenPercentDiscountOffer()) {
             discount = getTenPercentDiscount(p, quantity, offer, unitPrice);
         }
         if (canFiveForAmountOfferBeApplied(offer, quantityAsInt)) {
@@ -73,14 +76,14 @@ public class ShoppingCart {
 
     private Discount getFiveForAmountDiscount(Product p, double quantity, Offer offer, double unitPrice, int quantityAsInt, int numItemsInDiscount, int numberOfXs) {
 
-        double discountTotal = unitPrice * quantity - (offer.argument * numberOfXs + quantityAsInt % 5 * unitPrice);
-        Discount discount = new Discount(p, numItemsInDiscount + " for " + offer.argument, -discountTotal);
+        double discountTotal = unitPrice * quantity - (offer.price * numberOfXs + quantityAsInt % 5 * unitPrice);
+        Discount discount = new Discount(p, numItemsInDiscount + " for " + offer.price, -discountTotal);
         return discount;
     }
 
     private Discount getTenPercentDiscount(Product p, double quantity, Offer offer, double unitPrice) {
 
-        Discount discount = new Discount(p, offer.argument + "% off", -quantity * unitPrice * offer.argument / 100.0);
+        Discount discount = new Discount(p, offer.price + "% off", -quantity * unitPrice * offer.price / 100.0);
         return discount;
     }
 
@@ -91,33 +94,38 @@ public class ShoppingCart {
     }
 
     private Discount getTwoForAmountDiscount(Product p, double quantity, Offer offer, double unitPrice, int quantityAsInt, int numItemsInDiscount) {
-        double total = offer.argument * (quantityAsInt / numItemsInDiscount) + quantityAsInt % 2 * unitPrice;
+        double total = offer.price * (quantityAsInt / numItemsInDiscount) + quantityAsInt % 2 * unitPrice;
         double discountN = unitPrice * quantity - total;
-        Discount discount = new Discount(p, "2 for " + offer.argument, -discountN);
+        Discount discount = new Discount(p, "2 for " + offer.price, -discountN);
         return discount;
     }
 
     private boolean canFiveForAmountOfferBeApplied(Offer offer, int quantityAsInt) {
-        return isFiveForAmountOffer(offer) && quantityAsInt >= 5;
+        DiscountValidator discountValidator = new DiscountValidator(offer);
+        return discountValidator.isFiveForAmountOffer() && quantityAsInt >= 5;
     }
 
     private boolean canThreeForTwoOfferBeApplied(Offer offer, int quantityAsInt) {
-        return isThreeForTwoOffer(offer) && quantityAsInt > 2;
+
+        DiscountValidator discountValidator = new DiscountValidator(offer);
+        return discountValidator.isThreeForTwoOffer() && quantityAsInt > 2;
     }
 
     private boolean canTwoForAmountOfferBeApplied(Offer offer, int quantityAsInt) {
-        return isTwoForAmountOffer(offer) && quantityAsInt >= 2;
+        DiscountValidator discountValidator = new DiscountValidator(offer);
+        return discountValidator.isTwoForAmountOffer() && quantityAsInt >= 2;
     }
 
     private int getNumItemsInOffer(Offer offer){
 
+        DiscountValidator discountValidator = new DiscountValidator(offer);
         int numItemsInDiscount = 1;
-        if (isThreeForTwoOffer(offer)) {
+        if (discountValidator.isThreeForTwoOffer()) {
             numItemsInDiscount = 3;
-        } else if (isTwoForAmountOffer(offer)) {
+        } else if (discountValidator.isTwoForAmountOffer()) {
             numItemsInDiscount = 2;
 
-        } if (isFiveForAmountOffer(offer)) {
+        } if (discountValidator.isFiveForAmountOffer()) {
             numItemsInDiscount = 5;
         }
         return numItemsInDiscount;
@@ -127,19 +135,5 @@ public class ShoppingCart {
         return discount != null;
     }
 
-    private boolean isTenPercentDiscountOffer(Offer offer) {
-        return offer.offerType == SpecialOfferType.TenPercentDiscount;
-    }
 
-    private boolean isFiveForAmountOffer(Offer offer) {
-        return offer.offerType == SpecialOfferType.FiveForAmount;
-    }
-
-    private boolean isTwoForAmountOffer(Offer offer) {
-        return offer.offerType == SpecialOfferType.TwoForAmount;
-    }
-
-    private boolean isThreeForTwoOffer(Offer offer) {
-        return offer.offerType == SpecialOfferType.ThreeForTwo;
-    }
 }
