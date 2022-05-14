@@ -11,13 +11,11 @@ public class OfferBook {
     public Discount getDiscount(SupermarketCatalog catalog, Product product, double quantityInWeight, Offer offer) {
 
         double unitPrice = catalog.getUnitPrice(product);
-        int numItemsInDiscount = getNumItemsInOffer(offer);
         int quantityAsEaches = (int) quantityInWeight;
         Discount discount = null;
 
-        int numberOfXs = quantityAsEaches / numItemsInDiscount;
         if(offer.canBeApplied(offer, quantityAsEaches)){
-            discount = offer.getDiscountAmount(product, quantityInWeight, unitPrice, quantityAsEaches,numberOfXs);
+            discount = offer.getDiscountAmount(product, quantityInWeight, unitPrice);
         }
         return discount;
     }
