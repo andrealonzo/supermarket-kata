@@ -40,14 +40,14 @@ public class Teller {
     }
 
     private void addDiscountsToReceipt(ShoppingCart shoppingCart, Receipt receipt, Map<Product, Offer> productOfferMap, SupermarketCatalog catalog) {
-        Map<Product,Double> productQuantitiesMap = shoppingCart.getProductQuantitiesMap();
+        Map<Product,ProductAndAmount> productQuantitiesMap = shoppingCart.getProductQuantitiesMap();
         for (Product product : productQuantitiesMap.keySet()) {
-            double quantity = productQuantitiesMap.get(product);
+            double amount = productQuantitiesMap.get(product).getAmount();
             if (productOfferMap.containsKey(product)) {
                 Offer offer = productOfferMap.get(product);
                 double pricePerUnit = catalog.getUnitPrice(product);
-                if(offer.canBeApplied(quantity)){
-                    Discount discount = offer.getDiscounts(quantity, pricePerUnit);
+                if(offer.canBeApplied(amount)){
+                    Discount discount = offer.getDiscounts(amount, pricePerUnit);
                     receipt.addDiscount(discount);
                 }
             }
@@ -56,7 +56,7 @@ public class Teller {
     }
 
     private Double getAmountOfProductInCart(Product product, ShoppingCart shoppingCart) {
-        return shoppingCart.getProductQuantitiesMap().get(product);
+        return shoppingCart.getProductQuantitiesMap().get(product).getAmount();
     }
 
 }

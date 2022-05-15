@@ -17,4 +17,8 @@ public class ProductAndAmount {
         return amount;
     }
 
+    public void increaseAmount(double amount){
+        this.amount += amount;
+    }
+
 }

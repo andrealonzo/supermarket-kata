@@ -3,17 +3,22 @@ package dojo.supermarket.model;
 import java.util.*;
 
 public class ShoppingCart {
-    private Map<Product, Double> productQuantitiesMap = new HashMap<>();
 
-    public Map<Product, Double> getProductQuantitiesMap() {
+    private Map<Product, ProductAndAmount> productQuantitiesMap = new HashMap<>();
+
+    public Map<Product, ProductAndAmount> getProductQuantitiesMap() {
         return productQuantitiesMap;
     }
 
     public void addProductAndAmount(Product product, double amount) {
+        ProductAndAmount productAndAmount = new ProductAndAmount(product, amount);
         if (productQuantitiesMap.containsKey(product)) {
-            productQuantitiesMap.put(product, productQuantitiesMap.get(product) + amount);
+            ProductAndAmount found = productQuantitiesMap.get(product);
+            found.increaseAmount(amount);
+            //TODO: needed?
+            productQuantitiesMap.put(product, found);
         } else {
-            productQuantitiesMap.put(product, amount);
+            productQuantitiesMap.put(product, productAndAmount);
         }
     }
 
