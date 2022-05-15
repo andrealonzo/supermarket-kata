@@ -38,7 +38,7 @@ public class Cashier {
     private void addProductsAndAmountsToReceipt(Collection<ProductAndAmount> productsAndAmounts, Receipt receipt) {
         for (ProductAndAmount productAndAmount: productsAndAmounts) {
             double unitPrice = catalog.getPricePerUnit(productAndAmount.getProduct());
-            receipt.addProduct(productAndAmount.getProduct(), productAndAmount.getAmount(), unitPrice);
+            receipt.addPurchase(productAndAmount.getProduct(), productAndAmount.getAmount(), unitPrice);
         }
     }
 

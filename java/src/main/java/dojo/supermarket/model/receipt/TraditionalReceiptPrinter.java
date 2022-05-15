@@ -5,21 +5,21 @@ import dojo.supermarket.model.product.ProductUnitType;
 
 import java.util.Locale;
 
-public class ReceiptPrinter {
+public class TraditionalReceiptPrinter {
 
     private final int columns;
 
-    public ReceiptPrinter() {
+    public TraditionalReceiptPrinter() {
         this(40);
     }
 
-    public ReceiptPrinter(int columns) {
+    public TraditionalReceiptPrinter(int columns) {
         this.columns = columns;
     }
 
     public String printReceipt(Receipt receipt) {
         StringBuilder result = new StringBuilder();
-        for (ReceiptItem item : receipt.getItems()) {
+        for (ReceiptItem item : receipt.getPurchase()) {
             String receiptItem = presentReceiptItem(item);
             result.append(receiptItem);
         }
