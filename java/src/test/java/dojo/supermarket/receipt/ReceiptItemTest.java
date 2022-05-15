@@ -1,4 +1,4 @@
-package dojo.supermarket.model;
+package dojo.supermarket.receipt;
 
 import dojo.supermarket.model.product.Product;
 import dojo.supermarket.model.product.ProductUnitType;
