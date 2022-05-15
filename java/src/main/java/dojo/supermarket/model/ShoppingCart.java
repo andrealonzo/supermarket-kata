@@ -1,13 +1,9 @@
 package dojo.supermarket.model;
 
 import dojo.supermarket.model.discount.Discount;
-import dojo.supermarket.model.offer.OfferBook;
 import dojo.supermarket.model.offer.Offer;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ShoppingCart {
     private Map<Product, Double> productQuantitiesMap = new HashMap<>();
@@ -29,10 +25,11 @@ public class ShoppingCart {
             double quantity = productQuantitiesMap.get(product);
             if (productOfferMap.containsKey(product)) {
                 Offer offer = productOfferMap.get(product);
-                OfferBook offerBook = new OfferBook();
                 double pricePerUnit = catalog.getUnitPrice(product);
-                List<Discount> discounts = offerBook.getDiscounts(pricePerUnit, quantity, offer);
-                discounts.forEach(discount -> receipt.addDiscount(discount));
+                if(offer.canBeApplied(quantity)){
+                    Discount discount = offer.getDiscounts(quantity, pricePerUnit);
+                    receipt.addDiscount(discount);
+                }
             }
 
         }

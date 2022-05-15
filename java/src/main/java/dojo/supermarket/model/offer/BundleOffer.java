@@ -22,7 +22,7 @@ public class BundleOffer extends Offer {
     }
 
     @Override
-    public Discount getDiscountAmount( double quantityInWeight, double unitPrice) {
+    public Discount getDiscounts(double quantityInWeight, double unitPrice) {
         return null;
 //        Product product1 = new Product("toothbrush", ProductUnitType.Each);
 //        Product product2 = new Product("floss", ProductUnitType.Each);

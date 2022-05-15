@@ -20,7 +20,7 @@ public class NumForAmountOffer extends Offer{
     }
 
     @Override
-    public Discount getDiscountAmount(double quantityInWeight, double unitPrice) {
+    public Discount getDiscounts(double quantityInWeight, double unitPrice) {
         int quantityAsEaches = (int) quantityInWeight;
         int numberOfXs = quantityAsEaches / numItems;
         double discountTotal = unitPrice * quantityInWeight - (amount * numberOfXs + quantityAsEaches % numItems * unitPrice);

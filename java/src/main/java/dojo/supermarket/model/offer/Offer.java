@@ -16,5 +16,5 @@ public abstract class Offer {
 
     public abstract boolean canBeApplied(double quantity);
 
-    public abstract Discount getDiscountAmount(double quantityInWeight, double unitPrice);
+    public abstract Discount getDiscounts(double quantityInWeight, double unitPrice);
 }

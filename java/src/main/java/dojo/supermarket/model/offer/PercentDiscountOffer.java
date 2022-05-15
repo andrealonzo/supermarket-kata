@@ -16,7 +16,7 @@ public class PercentDiscountOffer extends Offer{
     }
 
     @Override
-    public Discount getDiscountAmount(double quantityInWeight, double unitPrice) {
+    public Discount getDiscounts(double quantityInWeight, double unitPrice) {
         Discount discount = new Discount(this.getProduct(), discountPercentage + "% off", -quantityInWeight * unitPrice * discountPercentage / 100.0);
         return discount;
     }
