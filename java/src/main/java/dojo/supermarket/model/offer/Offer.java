@@ -5,17 +5,21 @@ import dojo.supermarket.model.ProductAndAmount;
 import dojo.supermarket.model.ShoppingCart;
 import dojo.supermarket.model.discount.Discount;
 
+import java.util.Arrays;
 import java.util.List;
 
 public abstract class Offer {
-    private final Product product;
+    private final List<Product> affectedProducts;
 
-    public Offer(Product product ) {
-        this.product = product;
+    public Offer(Product affectedProduct) {
+        affectedProducts = Arrays.asList(affectedProduct);
+    }
+    public Offer(List<Product> affectedProducts) {
+        this.affectedProducts = affectedProducts;
     }
 
-    public Product getProduct() {
-        return product;
+    public List<Product> getAffectedProducts() {
+        return affectedProducts;
     }
 
     public abstract boolean canBeApplied(ProductAndAmount productAndAmount, ShoppingCart shoppingCart);

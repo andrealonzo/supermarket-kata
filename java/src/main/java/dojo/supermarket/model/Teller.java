@@ -18,7 +18,9 @@ public class Teller {
     }
 
     public void addOffer(Offer offer) {
-        this.productsAndOffers.put(offer.getProduct(), offer);
+        offer.getAffectedProducts().stream().forEach(
+                product->this.productsAndOffers.put(product, offer)
+        );
     }
 
     public Receipt checkOutShoppingCart(ShoppingCart shoppingCart) {
