@@ -28,7 +28,7 @@ public class SupermarketTest {
 
         cart.addProductQuantity(toothbrush, 1);
 
-        Receipt receipt = teller.checksOutArticlesFrom(cart);
+        Receipt receipt = teller.checkOutShoppingCart(cart);
 
         assertEquals(.99, receipt.getTotalPrice(), 0.01);
     }
@@ -41,7 +41,7 @@ public class SupermarketTest {
 
         cart.addProductQuantity(product, 1);
 
-        Receipt receipt = teller.checksOutArticlesFrom(cart);
+        Receipt receipt = teller.checkOutShoppingCart(cart);
 
         assertEquals(1.99, receipt.getTotalPrice(), 0.01);
 
@@ -58,7 +58,7 @@ public class SupermarketTest {
    //     Offer offer = new Offer(OfferType.TenPercentDiscount, product, 10.0);
         teller.addOffer(offer);
 
-        Receipt receipt = teller.checksOutArticlesFrom(cart);
+        Receipt receipt = teller.checkOutShoppingCart(cart);
 
         assertEquals(1.79, receipt.getTotalPrice(), 0.01);
 
@@ -75,7 +75,7 @@ public class SupermarketTest {
 
         teller.addOffer(offer);
 
-        Receipt receipt = teller.checksOutArticlesFrom(cart);
+        Receipt receipt = teller.checkOutShoppingCart(cart);
 
         assertEquals(2.24, receipt.getTotalPrice(), 0.01);
     }
@@ -90,7 +90,7 @@ public class SupermarketTest {
         Offer offer = new NumForAmountOffer(product,5, 10.0);
         teller.addOffer(offer);
 
-        Receipt receipt = teller.checksOutArticlesFrom(cart);
+        Receipt receipt = teller.checkOutShoppingCart(cart);
 
         assertEquals(2.49, receipt.getTotalPrice(), 0.01);
     }
@@ -101,7 +101,7 @@ public class SupermarketTest {
         catalog.addProduct(product, 1.79);
         cart.addProductQuantity(product, 5);
 
-        Receipt receipt = teller.checksOutArticlesFrom(cart);
+        Receipt receipt = teller.checkOutShoppingCart(cart);
 
         assertEquals(8.95, receipt.getTotalPrice(), 0.01);
     }
@@ -113,7 +113,7 @@ public class SupermarketTest {
         catalog.addProduct(product, 1.79);
         cart.addProductQuantity(product, 4);
 
-        Receipt receipt = teller.checksOutArticlesFrom(cart);
+        Receipt receipt = teller.checkOutShoppingCart(cart);
 
         assertEquals(7.16, receipt.getTotalPrice(), 0.01);
     }
@@ -125,7 +125,7 @@ public class SupermarketTest {
         catalog.addProduct(product, .69);
         cart.addProductQuantity(product, 2);
 
-        Receipt receipt = teller.checksOutArticlesFrom(cart);
+        Receipt receipt = teller.checkOutShoppingCart(cart);
 
         assertEquals(1.38, receipt.getTotalPrice(), 0.01);
     }
@@ -139,7 +139,7 @@ public class SupermarketTest {
         Offer offer = new NumForAmountOffer(product,2, .99);
         teller.addOffer(offer);
 
-        Receipt receipt = teller.checksOutArticlesFrom(cart);
+        Receipt receipt = teller.checkOutShoppingCart(cart);
 
         assertEquals(.99, receipt.getTotalPrice(), 0.01);
     }
@@ -156,7 +156,7 @@ public class SupermarketTest {
         cart.addProductQuantity(apples, 2.5);
 
         // ACT
-        Receipt receipt = teller.checksOutArticlesFrom(cart);
+        Receipt receipt = teller.checkOutShoppingCart(cart);
 
         // ASSERT
         assertEquals(4.975, receipt.getTotalPrice(), 0.01);
@@ -180,7 +180,7 @@ public class SupermarketTest {
         cart.addProductQuantity(toothbrush, 2);
 
         // ACT
-        Receipt receipt = teller.checksOutArticlesFrom(cart);
+        Receipt receipt = teller.checkOutShoppingCart(cart);
 
         // ASSERT
         assertEquals(1.78, receipt.getTotalPrice(), 0.01);
@@ -198,7 +198,7 @@ public class SupermarketTest {
         cart.addProductQuantity(toothbrush, 2);
 
         // ACT
-        Receipt receipt = teller.checksOutArticlesFrom(cart);
+        Receipt receipt = teller.checkOutShoppingCart(cart);
 
         // ASSERT
         assertEquals(1.58, receipt.getTotalPrice(), 0.01);
@@ -213,7 +213,7 @@ public class SupermarketTest {
         cart.addProductQuantity(product, 1);
         cart.addProductQuantity(product, 2);
 
-        Receipt receipt = teller.checksOutArticlesFrom(cart);
+        Receipt receipt = teller.checkOutShoppingCart(cart);
 
         assertEquals(2.97, receipt.getTotalPrice(), 0.01);
 
@@ -229,7 +229,7 @@ public class SupermarketTest {
 
         teller.addOffer(offer);
 
-        Receipt receipt = teller.checksOutArticlesFrom(cart);
+        Receipt receipt = teller.checkOutShoppingCart(cart);
 
         assertEquals(1.98, receipt.getTotalPrice(), 0.01);
 
@@ -244,7 +244,7 @@ public class SupermarketTest {
 
         teller.addOffer(offer);
 
-        Receipt receipt = teller.checksOutArticlesFrom(cart);
+        Receipt receipt = teller.checkOutShoppingCart(cart);
 
         assertEquals(2.97, receipt.getTotalPrice(), 0.01);
 
@@ -257,7 +257,7 @@ public class SupermarketTest {
         Offer offer = new NumForAmountOffer(product, 5,2.99);
         teller.addOffer(offer);
 
-        Receipt receipt = teller.checksOutArticlesFrom(cart);
+        Receipt receipt = teller.checkOutShoppingCart(cart);
 
         assertEquals(2.99, receipt.getTotalPrice(), 0.01);
 
@@ -271,7 +271,7 @@ public class SupermarketTest {
         Offer offer = new NumForAmountOffer(product, 5, 2.99);
         teller.addOffer(offer);
 
-        Receipt receipt = teller.checksOutArticlesFrom(cart);
+        Receipt receipt = teller.checkOutShoppingCart(cart);
 
         assertEquals(3.96, receipt.getTotalPrice(), 0.01);
 
@@ -285,7 +285,7 @@ public class SupermarketTest {
         Offer offer = new NumForAmountOffer(product, 4,2.99);
         teller.addOffer(offer);
 
-        Receipt receipt = teller.checksOutArticlesFrom(cart);
+        Receipt receipt = teller.checkOutShoppingCart(cart);
 
         assertEquals(2.99, receipt.getTotalPrice(), 0.01);
 

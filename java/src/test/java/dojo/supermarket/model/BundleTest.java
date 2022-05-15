@@ -3,7 +3,6 @@ package dojo.supermarket.model;
 import dojo.supermarket.model.offer.BundleOffer;
 import dojo.supermarket.model.offer.Offer;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -25,7 +24,7 @@ public class BundleTest {
         cart = new ShoppingCart();
     }
 
-    @Disabled
+  //  @Disabled
     @Test
     public void productsInBundleGet10PercentOff() {
         Product product1 = new Product("toothbrush", ProductUnitType.Each);
@@ -39,9 +38,10 @@ public class BundleTest {
         Offer offer = new BundleOffer(productsInBundle, bundleDiscount);
         teller.addOffer(offer);
 
-        Receipt receipt = teller.checksOutArticlesFrom(cart);
+        Receipt receipt = teller.checkOutShoppingCart(cart);
 
         assertEquals(2.68, receipt.getTotalPrice(), 0.01);
+        assertEquals(2, receipt.getDiscounts().size());
 
     }
 }

@@ -19,19 +19,23 @@ public class Teller {
         this.offers.put(offer.getProduct(), offer);
     }
 
-    public Receipt checksOutArticlesFrom(ShoppingCart theCart) {
+    public Receipt checkOutShoppingCart(ShoppingCart shoppingCart) {
         Receipt receipt = new Receipt();
 
-        Set<Product> productQuantities = theCart.getProductQuantitiesMap().keySet();
-        for (Product product: productQuantities) {
-            double quantity = theCart.getProductQuantitiesMap().get(product);
+        Set<Product> products = shoppingCart.getProductQuantitiesMap().keySet();
+        for (Product product: products) {
+            double amount = getAmountOfProductInCart(product, shoppingCart);
             double unitPrice = this.catalog.getUnitPrice(product);
-            double price = quantity * unitPrice;
-            receipt.addProduct(product, quantity, unitPrice, price);
+            double price = amount * unitPrice;
+            receipt.addProduct(product, amount, unitPrice, price);
         }
-        theCart.addReceiptDiscounts(receipt, this.offers, this.catalog);
+        shoppingCart.addDiscountsToReceipt(receipt, this.offers, this.catalog);
 
         return receipt;
+    }
+
+    private Double getAmountOfProductInCart(Product product, ShoppingCart shoppingCart) {
+        return shoppingCart.getProductQuantitiesMap().get(product);
     }
 
 }

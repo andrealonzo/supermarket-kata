@@ -20,7 +20,7 @@ public class ShoppingCart {
         }
     }
 
-    void addReceiptDiscounts(Receipt receipt, Map<Product, Offer> productOfferMap, SupermarketCatalog catalog) {
+    void addDiscountsToReceipt(Receipt receipt, Map<Product, Offer> productOfferMap, SupermarketCatalog catalog) {
         for (Product product : getProductQuantitiesMap().keySet()) {
             double quantity = productQuantitiesMap.get(product);
             if (productOfferMap.containsKey(product)) {
