@@ -30,7 +30,7 @@ public class HtmlPrinterTest {
         TraditionalReceiptPrinter printer = new TraditionalReceiptPrinter();
 
         Product product = new Product("bananas", ProductUnitType.Each);
-        receipt.addPurchase(product, 5, 7.00);
+        receipt.addReceiptItem(product, 5, 7.00);
 
         //WHEN
         String actualPrintout = printer.printReceipt(receipt);

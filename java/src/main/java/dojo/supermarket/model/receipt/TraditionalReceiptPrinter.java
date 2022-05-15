@@ -19,7 +19,7 @@ public class TraditionalReceiptPrinter {
 
     public String printReceipt(Receipt receipt) {
         StringBuilder result = new StringBuilder();
-        for (ReceiptItem item : receipt.getPurchase()) {
+        for (ReceiptItem item : receipt.getReceiptItems()) {
             String receiptItem = presentReceiptItem(item);
             result.append(receiptItem);
         }
