@@ -21,10 +21,10 @@ public class NumForAmountOffer extends Offer{
     }
 
     @Override
-    public Discount getDiscounts(double quantityInWeight, double unitPrice) {
-        int quantityAsEaches = (int) quantityInWeight;
+    public Discount getDiscounts(ProductAndAmount productAndAmount, double unitPrice) {
+        int quantityAsEaches = (int) productAndAmount.getAmount();
         int numberOfXs = quantityAsEaches / numItems;
-        double discountTotal = unitPrice * quantityInWeight - (amount * numberOfXs + quantityAsEaches % numItems * unitPrice);
+        double discountTotal = unitPrice * productAndAmount.getAmount() - (amount * numberOfXs + quantityAsEaches % numItems * unitPrice);
         Discount discount = new Discount(this.getProduct(), numItems + " for " + amount, -discountTotal);
         return discount;
     }

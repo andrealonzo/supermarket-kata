@@ -40,12 +40,11 @@ public class Teller {
         Map<Product,ProductAndAmount> productsAndAmountsMap = shoppingCart.getProductsAndAmountsMap();
         for (Product product : productsAndAmountsMap.keySet()) {
             ProductAndAmount productAndAmount = productsAndAmountsMap.get(product);
-            double amount = productsAndAmountsMap.get(product).getAmount();
             if (productOfferMap.containsKey(product)) {
                 Offer offer = productOfferMap.get(product);
                 double pricePerUnit = catalog.getPricePerUnit(product);
                 if(offer.canBeApplied(productAndAmount)){
-                    Discount discount = offer.getDiscounts(amount, pricePerUnit);
+                    Discount discount = offer.getDiscounts(productAndAmount, pricePerUnit);
                     receipt.addDiscount(discount);
                 }
             }
