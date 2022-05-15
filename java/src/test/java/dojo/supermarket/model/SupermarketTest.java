@@ -234,6 +234,21 @@ public class SupermarketTest {
         assertEquals(1.98, receipt.getTotalPrice(), 0.01);
 
     }
+
+    @Test
+    public void fiveForThreeDiscount() {
+        Product product = new Product("toothbrush", ProductUnitType.Each);
+        catalog.addProduct(product, 0.99);
+        cart.addProductQuantity(product, 5);
+        Offer offer = new NumForNumOffer(product, 5,3);
+
+        teller.addOffer(offer);
+
+        Receipt receipt = teller.checksOutArticlesFrom(cart);
+
+        assertEquals(2.97, receipt.getTotalPrice(), 0.01);
+
+    }
     @Test
     public void fiveForAmountDiscount() {
         Product product = new Product("toothbrush", ProductUnitType.Each);
