@@ -26,8 +26,7 @@ public class Teller {
         for (Product product: products) {
             double amount = getAmountOfProductInCart(product, shoppingCart);
             double unitPrice = this.catalog.getUnitPrice(product);
-            double price = amount * unitPrice;
-            receipt.addProduct(product, amount, unitPrice, price);
+            receipt.addProduct(product, amount, unitPrice);
         }
         shoppingCart.addDiscountsToReceipt(receipt, this.offers, this.catalog);
 
