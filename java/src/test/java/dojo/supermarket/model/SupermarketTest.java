@@ -225,7 +225,7 @@ public class SupermarketTest {
         catalog.addProduct(product, 0.99);
         cart.addProductQuantity(product, 1);
         cart.addProductQuantity(product, 2);
-        Offer offer = new ThreeForTwoOffer(product, 0);
+        Offer offer = new NumForNumOffer(product, 3,2);
 
         teller.addOffer(offer);
 
