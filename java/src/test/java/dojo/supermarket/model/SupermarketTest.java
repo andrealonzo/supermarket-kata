@@ -54,7 +54,7 @@ public class SupermarketTest {
 
         cart.addProductQuantity(product, 1);
 
-        Offer offer = new TenPercentDiscountOffer(product, 10.0);
+        Offer offer = new PercentDiscountOffer(product, 10.0);
    //     Offer offer = new Offer(OfferType.TenPercentDiscount, product, 10.0);
         teller.addOffer(offer);
 
@@ -71,7 +71,7 @@ public class SupermarketTest {
 
         cart.addProductQuantity(product, 1);
 
-        Offer offer = new TenPercentDiscountOffer(product, 10.0);
+        Offer offer = new PercentDiscountOffer(product, 10.0);
 
         teller.addOffer(offer);
 
@@ -149,7 +149,7 @@ public class SupermarketTest {
         catalog.addProduct(toothbrush, 0.99);
         Product apples = new Product("apples", ProductUnitType.Kilo);
         catalog.addProduct(apples, 1.99);
-         Offer offer = new TenPercentDiscountOffer(toothbrush, 10.0);
+         Offer offer = new PercentDiscountOffer(toothbrush, 10.0);
 
         teller.addOffer(offer);
 
@@ -174,7 +174,7 @@ public class SupermarketTest {
 
         Product toothbrush = new Product("toothbrush", ProductUnitType.Each);
         catalog.addProduct(toothbrush, 0.99);
-        Offer offer = new TenPercentDiscountOffer(toothbrush, 10.0);
+        Offer offer = new PercentDiscountOffer(toothbrush, 10.0);
         teller.addOffer(offer);
 
         cart.addProductQuantity(toothbrush, 2);
@@ -192,7 +192,7 @@ public class SupermarketTest {
 
         Product toothbrush = new Product("toothbrush", ProductUnitType.Each);
         catalog.addProduct(toothbrush, 0.99);
-        Offer offer = new TenPercentDiscountOffer(toothbrush, 20.0);
+        Offer offer = new PercentDiscountOffer(toothbrush, 20.0);
         teller.addOffer(offer);
 
         cart.addProductQuantity(toothbrush, 2);
