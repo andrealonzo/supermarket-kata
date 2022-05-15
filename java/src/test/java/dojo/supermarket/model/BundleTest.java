@@ -45,7 +45,7 @@ public class BundleTest {
         Receipt receipt = cashier.checkOutShoppingCart(cart);
 
         assertEquals(2.68, receipt.getTotalPrice(), 0.01);
-        assertEquals(2, receipt.getDiscounts().size());
+        assertEquals(2, receipt.getDiscountsApplied().size());
 
     }
     @Test
@@ -66,7 +66,7 @@ public class BundleTest {
 
         Receipt receipt = cashier.checkOutShoppingCart(cart);
 
-        assertEquals(2, receipt.getDiscounts().size());
+        assertEquals(2, receipt.getDiscountsApplied().size());
         assertEquals(5.37, receipt.getTotalPrice(), 0.01);
 
     }
@@ -87,7 +87,7 @@ public class BundleTest {
 
         Receipt receipt = cashier.checkOutShoppingCart(cart);
 
-        assertEquals(0, receipt.getDiscounts().size());
+        assertEquals(0, receipt.getDiscountsApplied().size());
         assertEquals(.99, receipt.getTotalPrice(), 0.01);
 
     }
@@ -110,7 +110,7 @@ public class BundleTest {
         Receipt receipt = cashier.checkOutShoppingCart(cart);
 
         //RESULT
-        assertEquals(2, receipt.getDiscounts().size());
+        assertEquals(2, receipt.getDiscountsApplied().size());
         assertEquals(4.47, receipt.getTotalPrice(), 0.01);
     }
 

@@ -23,7 +23,7 @@ public class TraditionalReceiptPrinter {
             String receiptItem = presentReceiptItem(item);
             result.append(receiptItem);
         }
-        for (Discount discount : receipt.getDiscounts()) {
+        for (Discount discount : receipt.getDiscountsApplied()) {
             String discountPresentation = presentDiscount(discount);
             result.append(discountPresentation);
         }

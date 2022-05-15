@@ -164,7 +164,7 @@ public class SupermarketTest {
 
         // ASSERT
         assertEquals(4.975, receipt.getTotalPrice(), 0.01);
-        assertEquals(Collections.emptyList(), receipt.getDiscounts());
+        assertEquals(Collections.emptyList(), receipt.getDiscountsApplied());
         assertEquals(1, receipt.getReceiptItems().size());
         ReceiptItem receiptItem = receipt.getReceiptItems().get(0);
         assertEquals(apples, receiptItem.getProduct());
@@ -188,7 +188,7 @@ public class SupermarketTest {
 
         // ASSERT
         assertEquals(1.78, receipt.getTotalPrice(), 0.01);
-        assertFalse( receipt.getDiscounts().isEmpty());
+        assertFalse( receipt.getDiscountsApplied().isEmpty());
 
     }
     @Test
@@ -206,7 +206,7 @@ public class SupermarketTest {
 
         // ASSERT
         assertEquals(1.58, receipt.getTotalPrice(), 0.01);
-        assertFalse( receipt.getDiscounts().isEmpty());
+        assertFalse( receipt.getDiscountsApplied().isEmpty());
 
     }
 

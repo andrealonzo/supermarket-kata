@@ -52,7 +52,7 @@ public class Cashier {
                 if(offer.canBeApplied(productAndAmount, shoppingCart)){
                     List<Discount> discounts = offer.getDiscounts(productAndAmount, pricePerUnit);
                     discounts.stream()
-                            .forEach(discount -> receipt.addDiscount(discount));
+                            .forEach(discount -> receipt.addDiscountsApplied(discount));
 
                 }
             }
