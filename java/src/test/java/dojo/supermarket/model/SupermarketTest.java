@@ -253,7 +253,7 @@ public class SupermarketTest {
         Product product = new Product("toothbrush", ProductUnitType.Each);
         catalog.addProduct(product, 0.99);
         cart.addProductQuantity(product, 4);
-        Offer offer = new FiveForAmountOffer(product, 2.99);
+        Offer offer = new NumForAmountOffer(product, 5, 2.99);
         teller.addOffer(offer);
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
