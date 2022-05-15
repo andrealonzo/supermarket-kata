@@ -4,22 +4,25 @@ import java.util.*;
 
 public class ShoppingCart {
 
-    private Map<Product, ProductAndAmount> productQuantitiesMap = new HashMap<>();
+    private Map<Product, ProductAndAmount> productsAndAmountsMap = new HashMap<>();
 
-    public Map<Product, ProductAndAmount> getProductsAndAmountsMap() {
-        return productQuantitiesMap;
+    private Map<Product, ProductAndAmount> getProductsAndAmountsMap() {
+        return productsAndAmountsMap;
     }
-
+    public Collection <ProductAndAmount> getProductsAndAmounts(){
+        return getProductsAndAmountsMap().values();
+    }
     public void addProductAndAmount(Product product, double amount) {
         ProductAndAmount productAndAmount = new ProductAndAmount(product, amount);
-        if (productQuantitiesMap.containsKey(product)) {
-            ProductAndAmount found = productQuantitiesMap.get(product);
+        if (productsAndAmountsMap.containsKey(product)) {
+            ProductAndAmount found = productsAndAmountsMap.get(product);
             found.increaseAmount(amount);
         } else {
-            productQuantitiesMap.put(product, productAndAmount);
+            productsAndAmountsMap.put(product, productAndAmount);
         }
     }
 
-
-
+    public boolean productExists(Product product) {
+        return productsAndAmountsMap.containsKey(product);
+    }
 }

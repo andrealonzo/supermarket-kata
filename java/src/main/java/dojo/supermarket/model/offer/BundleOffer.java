@@ -2,10 +2,10 @@ package dojo.supermarket.model.offer;
 
 import dojo.supermarket.model.Product;
 import dojo.supermarket.model.ProductAndAmount;
-import dojo.supermarket.model.ProductUnitType;
+import dojo.supermarket.model.ShoppingCart;
 import dojo.supermarket.model.discount.Discount;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class BundleOffer extends Offer {
@@ -18,13 +18,22 @@ public class BundleOffer extends Offer {
     }
 
     @Override
-    public boolean canBeApplied(ProductAndAmount productAndAmount) {
+    public boolean canBeApplied(ProductAndAmount productAndAmount, ShoppingCart shoppingCart) {
+        for (Product product:products){
+            if(!shoppingCart.productExists(product)){
+                return false;
+            }
+        }
         return true;
     }
 
     @Override
-    public Discount getDiscounts(ProductAndAmount productAndAmount, double unitPrice) {
-        return null;
+    public List<Discount> getDiscounts(ProductAndAmount productAndAmount, double unitPrice) {
+
+        double discountAmount = (productAndAmount.getAmount()*unitPrice)*discount;
+        Discount discount = new Discount(productAndAmount.getProduct(),"Bundle Discount", discountAmount);
+        //apply the percent discount to the product
+        return Arrays.asList(discount);
 //        Product product1 = new Product("toothbrush", ProductUnitType.Each);
 //        Product product2 = new Product("floss", ProductUnitType.Each);
 //        Discount discount1 = new Discount(product1,"Bundle Discount", .09);

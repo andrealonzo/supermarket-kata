@@ -5,26 +5,27 @@ import dojo.supermarket.model.offer.Offer;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Teller {
 
     private final SupermarketCatalog catalog;
-    private Map<Product, Offer> offers = new HashMap<>();
+    private Map<Product, Offer> productsAndOffers = new HashMap<>();
 
     public Teller(SupermarketCatalog catalog) {
         this.catalog = catalog;
     }
 
     public void addOffer(Offer offer) {
-        this.offers.put(offer.getProduct(), offer);
+        this.productsAndOffers.put(offer.getProduct(), offer);
     }
 
     public Receipt checkOutShoppingCart(ShoppingCart shoppingCart) {
         Receipt receipt = new Receipt();
-        Collection<ProductAndAmount> productsAndAmounts = shoppingCart.getProductsAndAmountsMap().values();
+        Collection<ProductAndAmount> productsAndAmounts = shoppingCart.getProductsAndAmounts();
         addProductsAndAmountsToReceipt(productsAndAmounts, receipt);
-        addDiscountsToReceipt(shoppingCart,receipt, offers);
+        addDiscountsToReceipt(shoppingCart,receipt, productsAndOffers);
 
         return receipt;
     }
@@ -37,15 +38,17 @@ public class Teller {
     }
 
     private void addDiscountsToReceipt(ShoppingCart shoppingCart, Receipt receipt, Map<Product, Offer> productOfferMap) {
-        Map<Product,ProductAndAmount> productsAndAmountsMap = shoppingCart.getProductsAndAmountsMap();
-        for (Product product : productsAndAmountsMap.keySet()) {
-            ProductAndAmount productAndAmount = productsAndAmountsMap.get(product);
+        Collection<ProductAndAmount> productsAndAmounts = shoppingCart.getProductsAndAmounts();
+        for (ProductAndAmount productAndAmount : productsAndAmounts) {
+            Product product = productAndAmount.getProduct();
             if (productOfferMap.containsKey(product)) {
                 Offer offer = productOfferMap.get(product);
                 double pricePerUnit = catalog.getPricePerUnit(product);
-                if(offer.canBeApplied(productAndAmount)){
-                    Discount discount = offer.getDiscounts(productAndAmount, pricePerUnit);
-                    receipt.addDiscount(discount);
+                if(offer.canBeApplied(productAndAmount, shoppingCart)){
+                    List<Discount> discounts = offer.getDiscounts(productAndAmount, pricePerUnit);
+                    discounts.stream()
+                            .forEach(discount -> receipt.addDiscount(discount));
+
                 }
             }
 

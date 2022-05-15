@@ -2,7 +2,11 @@ package dojo.supermarket.model.offer;
 
 import dojo.supermarket.model.Product;
 import dojo.supermarket.model.ProductAndAmount;
+import dojo.supermarket.model.ShoppingCart;
 import dojo.supermarket.model.discount.Discount;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class NumForNumOffer extends Offer{
 
@@ -16,17 +20,17 @@ public class NumForNumOffer extends Offer{
     }
 
     @Override
-    public boolean canBeApplied(ProductAndAmount productAndAmount) {
+    public boolean canBeApplied(ProductAndAmount productAndAmount, ShoppingCart shoppingCart) {
         return productAndAmount.getAmount() > num2Items;
     }
 
     @Override
-    public Discount getDiscounts(ProductAndAmount productAndAmount, double unitPrice) {
+    public List<Discount> getDiscounts(ProductAndAmount productAndAmount, double unitPrice) {
         int quantityAsEaches = (int) productAndAmount.getAmount();
         int numberOfXs = quantityAsEaches / num1Items;
         double discountAmount = productAndAmount.getAmount() * unitPrice - ((numberOfXs * num2Items * unitPrice) + quantityAsEaches % num1Items * unitPrice);
         Discount discount = new Discount(this.getProduct(), num1Items + " for " + num2Items, -discountAmount);
-        return discount;
+        return Arrays.asList(discount);
 
     }
 }

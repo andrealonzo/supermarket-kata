@@ -2,7 +2,10 @@ package dojo.supermarket.model.offer;
 
 import dojo.supermarket.model.Product;
 import dojo.supermarket.model.ProductAndAmount;
+import dojo.supermarket.model.ShoppingCart;
 import dojo.supermarket.model.discount.Discount;
+
+import java.util.List;
 
 public abstract class Offer {
     private final Product product;
@@ -15,7 +18,7 @@ public abstract class Offer {
         return product;
     }
 
-    public abstract boolean canBeApplied(ProductAndAmount productAndAmount);
+    public abstract boolean canBeApplied(ProductAndAmount productAndAmount, ShoppingCart shoppingCart);
 
-    public abstract Discount getDiscounts(ProductAndAmount productAndAmount, double unitPrice);
+    public abstract List<Discount> getDiscounts(ProductAndAmount productAndAmount, double unitPrice);
 }

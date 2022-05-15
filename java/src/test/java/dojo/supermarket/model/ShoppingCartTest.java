@@ -9,7 +9,7 @@ public class ShoppingCartTest {
     @Test
     public void newShoppingCartIsEmpty(){
         ShoppingCart cart = new ShoppingCart();
-        assertTrue(cart.getProductsAndAmountsMap().isEmpty());
+        assertTrue(cart.getProductsAndAmounts().isEmpty());
     }
 
 }
