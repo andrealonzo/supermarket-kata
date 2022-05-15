@@ -1,6 +1,8 @@
 package dojo.supermarket.model;
 
 import dojo.supermarket.model.offer.*;
+import dojo.supermarket.model.receipt.Receipt;
+import dojo.supermarket.model.receipt.ReceiptItem;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

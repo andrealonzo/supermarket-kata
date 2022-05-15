@@ -1,6 +1,7 @@
 package dojo.supermarket.model;
 
 import dojo.supermarket.model.discount.Discount;
+import dojo.supermarket.model.receipt.Receipt;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

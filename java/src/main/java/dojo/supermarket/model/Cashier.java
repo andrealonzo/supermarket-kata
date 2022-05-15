@@ -2,6 +2,7 @@ package dojo.supermarket.model;
 
 import dojo.supermarket.model.discount.Discount;
 import dojo.supermarket.model.offer.Offer;
+import dojo.supermarket.model.receipt.Receipt;
 
 import java.util.Collection;
 import java.util.HashMap;
