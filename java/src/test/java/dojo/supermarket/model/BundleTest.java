@@ -3,7 +3,6 @@ package dojo.supermarket.model;
 import dojo.supermarket.model.offer.BundleOffer;
 import dojo.supermarket.model.offer.Offer;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -16,13 +15,13 @@ public class BundleTest {
 
     private SupermarketCatalog catalog;
 
-    private Teller teller;
+    private Cashier cashier;
     private ShoppingCart cart;
 
     @BeforeEach
     public void setupTest() {
         catalog = new FakeCatalog();
-        teller = new Teller(catalog);
+        cashier = new Cashier(catalog);
         cart = new ShoppingCart();
     }
 
@@ -38,9 +37,9 @@ public class BundleTest {
         List<Product> productsInBundle = Arrays.asList(new Product[]{product1, product2});
         double bundleDiscount = .10;
         Offer offer = new BundleOffer(productsInBundle, bundleDiscount);
-        teller.addOffer(offer);
+        cashier.addOffer(offer);
 
-        Receipt receipt = teller.checkOutShoppingCart(cart);
+        Receipt receipt = cashier.checkOutShoppingCart(cart);
 
         assertEquals(2.68, receipt.getTotalPrice(), 0.01);
         assertEquals(2, receipt.getDiscounts().size());
@@ -60,9 +59,9 @@ public class BundleTest {
         List<Product> productsInBundle = Arrays.asList(new Product[]{product1, product2});
         double bundleDiscount = .20;
         Offer offer = new BundleOffer(productsInBundle, bundleDiscount);
-        teller.addOffer(offer);
+        cashier.addOffer(offer);
 
-        Receipt receipt = teller.checkOutShoppingCart(cart);
+        Receipt receipt = cashier.checkOutShoppingCart(cart);
 
         assertEquals(2, receipt.getDiscounts().size());
         assertEquals(5.37, receipt.getTotalPrice(), 0.01);
@@ -81,9 +80,9 @@ public class BundleTest {
         List<Product> productsInBundleOffer = Arrays.asList(new Product[]{product1, product2});
         double bundleDiscount = .10;
         Offer offer = new BundleOffer(productsInBundleOffer, bundleDiscount);
-        teller.addOffer(offer);
+        cashier.addOffer(offer);
 
-        Receipt receipt = teller.checkOutShoppingCart(cart);
+        Receipt receipt = cashier.checkOutShoppingCart(cart);
 
         assertEquals(0, receipt.getDiscounts().size());
         assertEquals(.99, receipt.getTotalPrice(), 0.01);
@@ -92,9 +91,9 @@ public class BundleTest {
 
     @Test
     public void allProductsThatMeetMinBundleReqGet10PercentOff() {
+        //GIVEN
         Product product1 = new Product("toothbrush", ProductUnitType.Each);
         Product product2 = new Product("floss", ProductUnitType.Each);
-        Product product3 = new Product("cups", ProductUnitType.Each);
         catalog.addProduct(product1, 0.99);
         catalog.addProduct(product2, 1.99);
         cart.addProductAndAmount(product1, 1);
@@ -102,13 +101,14 @@ public class BundleTest {
         List<Product> productsInBundle = Arrays.asList(new Product[]{product1, product2});
         double bundleDiscount = .10;
         Offer offer = new BundleOffer(productsInBundle, bundleDiscount);
-        teller.addOffer(offer);
+        cashier.addOffer(offer);
 
-        Receipt receipt = teller.checkOutShoppingCart(cart);
+        //WHEN
+        Receipt receipt = cashier.checkOutShoppingCart(cart);
 
+        //RESULT
         assertEquals(2, receipt.getDiscounts().size());
         assertEquals(4.47, receipt.getTotalPrice(), 0.01);
-
     }
 
 }

@@ -8,12 +8,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Teller {
+public class Cashier {
 
     private final SupermarketCatalog catalog;
     private Map<Product, Offer> productsAndOffers = new HashMap<>();
 
-    public Teller(SupermarketCatalog catalog) {
+    public Cashier(SupermarketCatalog catalog) {
         this.catalog = catalog;
     }
 
