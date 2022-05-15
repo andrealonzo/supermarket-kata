@@ -15,8 +15,6 @@ public class ShoppingCart {
         if (productQuantitiesMap.containsKey(product)) {
             ProductAndAmount found = productQuantitiesMap.get(product);
             found.increaseAmount(amount);
-            //TODO: needed?
-            productQuantitiesMap.put(product, found);
         } else {
             productQuantitiesMap.put(product, productAndAmount);
         }
