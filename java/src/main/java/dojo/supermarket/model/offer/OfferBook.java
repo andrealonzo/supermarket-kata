@@ -5,7 +5,7 @@ import dojo.supermarket.model.discount.Discount;
 
 public class OfferBook {
 
-    public Discount getDiscount(double pricePerUnit, Product product, double quantity, Offer offer) {
+    public Discount getDiscount(double pricePerUnit, double quantity, Offer offer) {
 
         Discount discount = null;
         if(offer.canBeApplied(quantity)){

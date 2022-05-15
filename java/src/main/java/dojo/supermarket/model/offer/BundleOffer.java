@@ -1,8 +1,10 @@
 package dojo.supermarket.model.offer;
 
 import dojo.supermarket.model.Product;
+import dojo.supermarket.model.ProductUnitType;
 import dojo.supermarket.model.discount.Discount;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BundleOffer extends Offer {
@@ -15,12 +17,22 @@ public class BundleOffer extends Offer {
     }
 
     @Override
-    public boolean canBeApplied(double quantityInWeight) {
+    public boolean canBeApplied(double quantity) {
         return true;
     }
 
     @Override
     public Discount getDiscountAmount( double quantityInWeight, double unitPrice) {
         return null;
+//        Product product1 = new Product("toothbrush", ProductUnitType.Each);
+//        Product product2 = new Product("floss", ProductUnitType.Each);
+//        Discount discount1 = new Discount(product1,"Bundle Discount", .09);
+//        Discount discount2 = new Discount(product2,"Bundle Discount", .19);
+//
+//        List<Discount> discounts = new ArrayList<>();
+//        discounts.add(discount1);
+//        discounts.add(discount2);
+//
+//        return discounts;
     }
 }

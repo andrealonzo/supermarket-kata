@@ -32,7 +32,7 @@ public class ShoppingCart {
                 Offer offer = productOfferMap.get(product);
                 OfferBook offerBook = new OfferBook();
                 double pricePerUnit = catalog.getUnitPrice(product);
-                Discount discount = offerBook.getDiscount(pricePerUnit, product, quantity, offer);
+                Discount discount = offerBook.getDiscount(pricePerUnit, quantity, offer);
                if (discount != null)
                     receipt.addDiscount(discount);
             }

@@ -22,23 +22,23 @@ public class BundleTest {
             teller = new Teller(catalog);
             cart = new ShoppingCart();
         }
-//
-//    @Test
-//    public void productsInBundleGet10PercentOff() {
-//        Product product1 = new Product("toothbrush", ProductUnitType.Each);
-//        Product product2 = new Product("floss", ProductUnitType.Each);
-//        catalog.addProduct(product1, 0.99);
-//        catalog.addProduct(product2, 1.99);
-//        cart.addProductQuantity(product1, 1);
-//        cart.addProductQuantity(product2, 1);
-//        List<Product> productsInBundle = Arrays.asList(new Product[] { product1,product2 });
-//        double bundleDiscount = .10;
-//        Offer offer = new BundleOffer(productsInBundle, bundleDiscount);
-//        teller.addOffer(offer);
-//
-//        Receipt receipt = teller.checksOutArticlesFrom(cart);
-//
-//        assertEquals(2.99, receipt.getTotalPrice(), 0.01);
-//
-//    }
+
+    @Test
+    public void productsInBundleGet10PercentOff() {
+        Product product1 = new Product("toothbrush", ProductUnitType.Each);
+        Product product2 = new Product("floss", ProductUnitType.Each);
+        catalog.addProduct(product1, 0.99);
+        catalog.addProduct(product2, 1.99);
+        cart.addProductQuantity(product1, 1);
+        cart.addProductQuantity(product2, 1);
+        List<Product> productsInBundle = Arrays.asList(new Product[] { product1,product2 });
+        double bundleDiscount = .10;
+        Offer offer = new BundleOffer(productsInBundle, bundleDiscount);
+        teller.addOffer(offer);
+
+        Receipt receipt = teller.checksOutArticlesFrom(cart);
+
+        assertEquals(2.68, receipt.getTotalPrice(), 0.01);
+
+    }
 }
