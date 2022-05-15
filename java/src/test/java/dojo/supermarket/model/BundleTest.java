@@ -31,8 +31,8 @@ public class BundleTest {
         Product product2 = new Product("floss", ProductUnitType.Each);
         catalog.addProduct(product1, 0.99);
         catalog.addProduct(product2, 1.99);
-        cart.addProductQuantity(product1, 1);
-        cart.addProductQuantity(product2, 1);
+        cart.addProductAndAmount(product1, 1);
+        cart.addProductAndAmount(product2, 1);
         List<Product> productsInBundle = Arrays.asList(new Product[]{product1, product2});
         double bundleDiscount = .10;
         Offer offer = new BundleOffer(productsInBundle, bundleDiscount);

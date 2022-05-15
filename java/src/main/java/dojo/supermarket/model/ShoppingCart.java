@@ -1,8 +1,5 @@
 package dojo.supermarket.model;
 
-import dojo.supermarket.model.discount.Discount;
-import dojo.supermarket.model.offer.Offer;
-
 import java.util.*;
 
 public class ShoppingCart {
@@ -12,28 +9,14 @@ public class ShoppingCart {
         return productQuantitiesMap;
     }
 
-    public void addProductQuantity(Product product, double quantity) {
+    public void addProductAndAmount(Product product, double amount) {
         if (productQuantitiesMap.containsKey(product)) {
-            productQuantitiesMap.put(product, productQuantitiesMap.get(product) + quantity);
+            productQuantitiesMap.put(product, productQuantitiesMap.get(product) + amount);
         } else {
-            productQuantitiesMap.put(product, quantity);
+            productQuantitiesMap.put(product, amount);
         }
     }
 
-    void addDiscountsToReceipt(Receipt receipt, Map<Product, Offer> productOfferMap, SupermarketCatalog catalog) {
-        for (Product product : getProductQuantitiesMap().keySet()) {
-            double quantity = productQuantitiesMap.get(product);
-            if (productOfferMap.containsKey(product)) {
-                Offer offer = productOfferMap.get(product);
-                double pricePerUnit = catalog.getUnitPrice(product);
-                if(offer.canBeApplied(quantity)){
-                    Discount discount = offer.getDiscounts(quantity, pricePerUnit);
-                    receipt.addDiscount(discount);
-                }
-            }
-
-        }
-    }
 
 
 }

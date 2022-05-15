@@ -26,7 +26,7 @@ public class SupermarketTest {
         Product toothbrush = new Product("toothbrush", ProductUnitType.Each);
         catalog.addProduct(toothbrush, 0.99);
 
-        cart.addProductQuantity(toothbrush, 1);
+        cart.addProductAndAmount(toothbrush, 1);
 
         Receipt receipt = teller.checkOutShoppingCart(cart);
 
@@ -39,7 +39,7 @@ public class SupermarketTest {
         Product product = new Product("apple", ProductUnitType.Kilo);
         catalog.addProduct(product, 1.99);
 
-        cart.addProductQuantity(product, 1);
+        cart.addProductAndAmount(product, 1);
 
         Receipt receipt = teller.checkOutShoppingCart(cart);
 
@@ -52,7 +52,7 @@ public class SupermarketTest {
         Product product = new Product("apple", ProductUnitType.Kilo);
         catalog.addProduct(product, 1.99);
 
-        cart.addProductQuantity(product, 1);
+        cart.addProductAndAmount(product, 1);
 
         Offer offer = new PercentDiscountOffer(product, 10.0);
    //     Offer offer = new Offer(OfferType.TenPercentDiscount, product, 10.0);
@@ -69,7 +69,7 @@ public class SupermarketTest {
         Product product = new Product("rice", ProductUnitType.Kilo);
         catalog.addProduct(product, 2.49);
 
-        cart.addProductQuantity(product, 1);
+        cart.addProductAndAmount(product, 1);
 
         Offer offer = new PercentDiscountOffer(product, 10.0);
 
@@ -84,7 +84,7 @@ public class SupermarketTest {
 
         Product product = new Product("rice", ProductUnitType.Kilo);
         catalog.addProduct(product, 2.49);
-        cart.addProductQuantity(product, 1);
+        cart.addProductAndAmount(product, 1);
 
 
         Offer offer = new NumForAmountOffer(product,5, 10.0);
@@ -99,7 +99,7 @@ public class SupermarketTest {
 
         Product product = new Product("toothpaste", ProductUnitType.Each);
         catalog.addProduct(product, 1.79);
-        cart.addProductQuantity(product, 5);
+        cart.addProductAndAmount(product, 5);
 
         Receipt receipt = teller.checkOutShoppingCart(cart);
 
@@ -111,7 +111,7 @@ public class SupermarketTest {
 
         Product product = new Product("toothpaste", ProductUnitType.Each);
         catalog.addProduct(product, 1.79);
-        cart.addProductQuantity(product, 4);
+        cart.addProductAndAmount(product, 4);
 
         Receipt receipt = teller.checkOutShoppingCart(cart);
 
@@ -123,7 +123,7 @@ public class SupermarketTest {
 
         Product product = new Product("tomato", ProductUnitType.Each);
         catalog.addProduct(product, .69);
-        cart.addProductQuantity(product, 2);
+        cart.addProductAndAmount(product, 2);
 
         Receipt receipt = teller.checkOutShoppingCart(cart);
 
@@ -134,7 +134,7 @@ public class SupermarketTest {
 
         Product product = new Product("tomato", ProductUnitType.Each);
         catalog.addProduct(product, .69);
-        cart.addProductQuantity(product, 2);
+        cart.addProductAndAmount(product, 2);
 
         Offer offer = new NumForAmountOffer(product,2, .99);
         teller.addOffer(offer);
@@ -153,7 +153,7 @@ public class SupermarketTest {
 
         teller.addOffer(offer);
 
-        cart.addProductQuantity(apples, 2.5);
+        cart.addProductAndAmount(apples, 2.5);
 
         // ACT
         Receipt receipt = teller.checkOutShoppingCart(cart);
@@ -177,7 +177,7 @@ public class SupermarketTest {
         Offer offer = new PercentDiscountOffer(toothbrush, 10.0);
         teller.addOffer(offer);
 
-        cart.addProductQuantity(toothbrush, 2);
+        cart.addProductAndAmount(toothbrush, 2);
 
         // ACT
         Receipt receipt = teller.checkOutShoppingCart(cart);
@@ -195,7 +195,7 @@ public class SupermarketTest {
         Offer offer = new PercentDiscountOffer(toothbrush, 20.0);
         teller.addOffer(offer);
 
-        cart.addProductQuantity(toothbrush, 2);
+        cart.addProductAndAmount(toothbrush, 2);
 
         // ACT
         Receipt receipt = teller.checkOutShoppingCart(cart);
@@ -210,8 +210,8 @@ public class SupermarketTest {
     public void addItemsMultipleTimes() {
         Product product = new Product("toothbrush", ProductUnitType.Each);
         catalog.addProduct(product, 0.99);
-        cart.addProductQuantity(product, 1);
-        cart.addProductQuantity(product, 2);
+        cart.addProductAndAmount(product, 1);
+        cart.addProductAndAmount(product, 2);
 
         Receipt receipt = teller.checkOutShoppingCart(cart);
 
@@ -223,8 +223,8 @@ public class SupermarketTest {
     public void threeForTwoDiscount() {
         Product product = new Product("toothbrush", ProductUnitType.Each);
         catalog.addProduct(product, 0.99);
-        cart.addProductQuantity(product, 1);
-        cart.addProductQuantity(product, 2);
+        cart.addProductAndAmount(product, 1);
+        cart.addProductAndAmount(product, 2);
         Offer offer = new NumForNumOffer(product, 3,2);
 
         teller.addOffer(offer);
@@ -239,7 +239,7 @@ public class SupermarketTest {
     public void fiveForThreeDiscount() {
         Product product = new Product("toothbrush", ProductUnitType.Each);
         catalog.addProduct(product, 0.99);
-        cart.addProductQuantity(product, 5);
+        cart.addProductAndAmount(product, 5);
         Offer offer = new NumForNumOffer(product, 5,3);
 
         teller.addOffer(offer);
@@ -253,7 +253,7 @@ public class SupermarketTest {
     public void fiveForAmountDiscount() {
         Product product = new Product("toothbrush", ProductUnitType.Each);
         catalog.addProduct(product, 0.99);
-        cart.addProductQuantity(product, 5);
+        cart.addProductAndAmount(product, 5);
         Offer offer = new NumForAmountOffer(product, 5,2.99);
         teller.addOffer(offer);
 
@@ -267,7 +267,7 @@ public class SupermarketTest {
     public void fiveForAmountDiscountWithLessThanFiveDoesntGetDiscount() {
         Product product = new Product("toothbrush", ProductUnitType.Each);
         catalog.addProduct(product, 0.99);
-        cart.addProductQuantity(product, 4);
+        cart.addProductAndAmount(product, 4);
         Offer offer = new NumForAmountOffer(product, 5, 2.99);
         teller.addOffer(offer);
 
@@ -281,7 +281,7 @@ public class SupermarketTest {
     public void fourForAmountDiscount() {
         Product product = new Product("toothbrush", ProductUnitType.Each);
         catalog.addProduct(product, 0.99);
-        cart.addProductQuantity(product, 4);
+        cart.addProductAndAmount(product, 4);
         Offer offer = new NumForAmountOffer(product, 4,2.99);
         teller.addOffer(offer);
 

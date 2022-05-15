@@ -1,5 +1,6 @@
 package dojo.supermarket.model;
 
+import dojo.supermarket.model.discount.Discount;
 import dojo.supermarket.model.offer.Offer;
 
 import java.util.HashMap;
@@ -23,14 +24,35 @@ public class Teller {
         Receipt receipt = new Receipt();
 
         Set<Product> products = shoppingCart.getProductQuantitiesMap().keySet();
+        addProductsToReceipt(shoppingCart, receipt, products);
+        addDiscountsToReceipt(shoppingCart,receipt, offers, catalog);
+        //shoppingCart.addDiscountsToReceipt(receipt, offers, catalog);
+
+        return receipt;
+    }
+
+    private void addProductsToReceipt(ShoppingCart shoppingCart, Receipt receipt, Set<Product> products) {
         for (Product product: products) {
             double amount = getAmountOfProductInCart(product, shoppingCart);
             double unitPrice = this.catalog.getUnitPrice(product);
             receipt.addProduct(product, amount, unitPrice);
         }
-        shoppingCart.addDiscountsToReceipt(receipt, this.offers, this.catalog);
+    }
 
-        return receipt;
+    private void addDiscountsToReceipt(ShoppingCart shoppingCart, Receipt receipt, Map<Product, Offer> productOfferMap, SupermarketCatalog catalog) {
+        Map<Product,Double> productQuantitiesMap = shoppingCart.getProductQuantitiesMap();
+        for (Product product : productQuantitiesMap.keySet()) {
+            double quantity = productQuantitiesMap.get(product);
+            if (productOfferMap.containsKey(product)) {
+                Offer offer = productOfferMap.get(product);
+                double pricePerUnit = catalog.getUnitPrice(product);
+                if(offer.canBeApplied(quantity)){
+                    Discount discount = offer.getDiscounts(quantity, pricePerUnit);
+                    receipt.addDiscount(discount);
+                }
+            }
+
+        }
     }
 
     private Double getAmountOfProductInCart(Product product, ShoppingCart shoppingCart) {
