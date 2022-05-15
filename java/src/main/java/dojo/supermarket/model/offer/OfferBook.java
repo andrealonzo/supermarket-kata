@@ -1,17 +1,20 @@
 package dojo.supermarket.model.offer;
 
-import dojo.supermarket.model.Product;
 import dojo.supermarket.model.discount.Discount;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class OfferBook {
 
-    public Discount getDiscount(double pricePerUnit, double quantity, Offer offer) {
+    public List<Discount> getDiscounts(double pricePerUnit, double quantity, Offer offer) {
+        List<Discount> discounts = new ArrayList<>();
 
-        Discount discount = null;
         if(offer.canBeApplied(quantity)){
-            discount = offer.getDiscountAmount(quantity, pricePerUnit);
+            Discount discount = offer.getDiscountAmount(quantity, pricePerUnit);
+            discounts.add(discount);
         }
-        return discount;
+        return discounts;
     }
 
 }

@@ -5,12 +5,11 @@ import dojo.supermarket.model.offer.OfferBook;
 import dojo.supermarket.model.offer.Offer;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 public class ShoppingCart {
-/*
-    TODO:  Make DiscountValidator not check for types.  Remove offerType
-    */
     private Map<Product, Double> productQuantitiesMap = new HashMap<>();
 
     public Map<Product, Double> getProductQuantitiesMap() {
@@ -26,15 +25,14 @@ public class ShoppingCart {
     }
 
     void addReceiptDiscounts(Receipt receipt, Map<Product, Offer> productOfferMap, SupermarketCatalog catalog) {
-        for (Product product: getProductQuantitiesMap().keySet()) {
+        for (Product product : getProductQuantitiesMap().keySet()) {
             double quantity = productQuantitiesMap.get(product);
             if (productOfferMap.containsKey(product)) {
                 Offer offer = productOfferMap.get(product);
                 OfferBook offerBook = new OfferBook();
                 double pricePerUnit = catalog.getUnitPrice(product);
-                Discount discount = offerBook.getDiscount(pricePerUnit, quantity, offer);
-               if (discount != null)
-                    receipt.addDiscount(discount);
+                List<Discount> discounts = offerBook.getDiscounts(pricePerUnit, quantity, offer);
+                discounts.forEach(discount -> receipt.addDiscount(discount));
             }
 
         }
