@@ -87,7 +87,7 @@ public class SupermarketTest {
         cart.addProductQuantity(product, 1);
 
 
-        Offer offer = new FiveForAmountOffer(product, 10.0);
+        Offer offer = new NumForAmountOffer(product,5, 10.0);
         teller.addOffer(offer);
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
@@ -239,7 +239,7 @@ public class SupermarketTest {
         Product product = new Product("toothbrush", ProductUnitType.Each);
         catalog.addProduct(product, 0.99);
         cart.addProductQuantity(product, 5);
-        Offer offer = new FiveForAmountOffer(product, 2.99);
+        Offer offer = new NumForAmountOffer(product, 5,2.99);
         teller.addOffer(offer);
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
@@ -262,5 +262,18 @@ public class SupermarketTest {
 
     }
 
+    @Test
+    public void fourForAmountDiscount() {
+        Product product = new Product("toothbrush", ProductUnitType.Each);
+        catalog.addProduct(product, 0.99);
+        cart.addProductQuantity(product, 4);
+        Offer offer = new NumForAmountOffer(product, 4,2.99);
+        teller.addOffer(offer);
+
+        Receipt receipt = teller.checksOutArticlesFrom(cart);
+
+        assertEquals(2.99, receipt.getTotalPrice(), 0.01);
+
+    }
 
 }
