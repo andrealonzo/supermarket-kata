@@ -4,10 +4,10 @@ import dojo.supermarket.model.Product;
 import dojo.supermarket.model.discount.Discount;
 
 public class PercentDiscountOffer extends Offer{
-    private double price;
-    public PercentDiscountOffer(Product product, double price) {
+    private double discountPercentage;
+    public PercentDiscountOffer(Product product, double discountPercentage) {
         super(product);
-        this.price = price;
+        this.discountPercentage = discountPercentage;
     }
 
     @Override
@@ -17,7 +17,7 @@ public class PercentDiscountOffer extends Offer{
 
     @Override
     public Discount getDiscountAmount(Product product, double quantityInWeight, double unitPrice) {
-        Discount discount = new Discount(product, price + "% off", -quantityInWeight * unitPrice * price  / 100.0);
+        Discount discount = new Discount(product, discountPercentage + "% off", -quantityInWeight * unitPrice * discountPercentage / 100.0);
         return discount;
     }
 }
