@@ -15,8 +15,7 @@ public class NumForAmountOffer extends Offer{
     }
 
     @Override
-    public boolean canBeApplied(double quantityInWeight) {
-        int quantity = (int)quantityInWeight;
+    public boolean canBeApplied(double quantity) {
         return quantity >= numItems;
     }
 
