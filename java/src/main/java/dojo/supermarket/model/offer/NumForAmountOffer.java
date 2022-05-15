@@ -1,6 +1,7 @@
 package dojo.supermarket.model.offer;
 
 import dojo.supermarket.model.Product;
+import dojo.supermarket.model.ProductAndAmount;
 import dojo.supermarket.model.discount.Discount;
 
 public class NumForAmountOffer extends Offer{
@@ -15,8 +16,8 @@ public class NumForAmountOffer extends Offer{
     }
 
     @Override
-    public boolean canBeApplied(double quantity) {
-        return quantity >= numItems;
+    public boolean canBeApplied(ProductAndAmount productAndAmount) {
+        return productAndAmount.getAmount() >= numItems;
     }
 
     @Override

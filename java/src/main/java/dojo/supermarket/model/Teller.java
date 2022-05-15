@@ -39,11 +39,12 @@ public class Teller {
     private void addDiscountsToReceipt(ShoppingCart shoppingCart, Receipt receipt, Map<Product, Offer> productOfferMap) {
         Map<Product,ProductAndAmount> productsAndAmountsMap = shoppingCart.getProductsAndAmountsMap();
         for (Product product : productsAndAmountsMap.keySet()) {
+            ProductAndAmount productAndAmount = productsAndAmountsMap.get(product);
             double amount = productsAndAmountsMap.get(product).getAmount();
             if (productOfferMap.containsKey(product)) {
                 Offer offer = productOfferMap.get(product);
                 double pricePerUnit = catalog.getPricePerUnit(product);
-                if(offer.canBeApplied(amount)){
+                if(offer.canBeApplied(productAndAmount)){
                     Discount discount = offer.getDiscounts(amount, pricePerUnit);
                     receipt.addDiscount(discount);
                 }

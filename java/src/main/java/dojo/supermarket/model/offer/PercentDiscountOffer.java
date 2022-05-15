@@ -1,6 +1,7 @@
 package dojo.supermarket.model.offer;
 
 import dojo.supermarket.model.Product;
+import dojo.supermarket.model.ProductAndAmount;
 import dojo.supermarket.model.discount.Discount;
 
 public class PercentDiscountOffer extends Offer{
@@ -11,7 +12,7 @@ public class PercentDiscountOffer extends Offer{
     }
 
     @Override
-    public boolean canBeApplied(double quantity) {
+    public boolean canBeApplied(ProductAndAmount productAndAmount) {
         return true;
     }
 
