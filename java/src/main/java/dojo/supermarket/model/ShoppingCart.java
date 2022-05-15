@@ -6,7 +6,7 @@ public class ShoppingCart {
 
     private Map<Product, ProductAndAmount> productQuantitiesMap = new HashMap<>();
 
-    public Map<Product, ProductAndAmount> getProductQuantitiesMap() {
+    public Map<Product, ProductAndAmount> getProductsAndAmountsMap() {
         return productQuantitiesMap;
     }
 
