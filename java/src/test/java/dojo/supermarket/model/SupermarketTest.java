@@ -136,7 +136,7 @@ public class SupermarketTest {
         catalog.addProduct(product, .69);
         cart.addProductQuantity(product, 2);
 
-        Offer offer = new TwoForAmountOffer(product, .99);
+        Offer offer = new NumForAmountOffer(product,2, .99);
         teller.addOffer(offer);
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
