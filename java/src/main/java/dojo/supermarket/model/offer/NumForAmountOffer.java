@@ -6,9 +6,12 @@ import dojo.supermarket.model.discount.Discount;
 public class NumForAmountOffer extends Offer{
 
     private int numItems;
+    private double price;
 
     public NumForAmountOffer(Product product, int numItems, double price) {
+
         super(product, price);
+        this.price = price;
         this.numItems = numItems;
     }
 
@@ -22,8 +25,8 @@ public class NumForAmountOffer extends Offer{
     public Discount getDiscountAmount(Product product, double quantityInWeight, double unitPrice) {
         int quantityAsEaches = (int) quantityInWeight;
         int numberOfXs = quantityAsEaches / numItems;
-        double discountTotal = unitPrice * quantityInWeight - (this.getPrice() * numberOfXs + quantityAsEaches % numItems * unitPrice);
-        Discount discount = new Discount(product, numItems + " for " + this.getPrice(), -discountTotal);
+        double discountTotal = unitPrice * quantityInWeight - (price  * numberOfXs + quantityAsEaches % numItems * unitPrice);
+        Discount discount = new Discount(product, numItems + " for " + price, -discountTotal);
         return discount;
     }
 }
