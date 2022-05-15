@@ -11,8 +11,8 @@ import java.util.List;
 public class BundleOffer extends Offer {
 
     private double discount;
-    public BundleOffer(List<Product> products, double discount) {
-        super(products);
+    public BundleOffer(List<Product> affectedProducts, double discount) {
+        super(affectedProducts);
         this.discount = discount;
     }
 
@@ -30,8 +30,7 @@ public class BundleOffer extends Offer {
     public List<Discount> getDiscounts(ProductAndAmount productAndAmount, double unitPrice) {
 
         double discountAmount = (productAndAmount.getAmount()*unitPrice)*discount;
-        Discount discount = new Discount(productAndAmount.getProduct(),"Bundle Discount", discountAmount);
-        //apply the percent discount to the product
+        Discount discount = new Discount(productAndAmount.getProduct(),"Bundle Discount", -discountAmount);
         return Arrays.asList(discount);
 
     }
