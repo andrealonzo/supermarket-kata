@@ -9,7 +9,7 @@ public class OfferBook {
 
         Discount discount = null;
         if(offer.canBeApplied(quantity)){
-            discount = offer.getDiscountAmount(product, quantity, pricePerUnit);
+            discount = offer.getDiscountAmount(quantity, pricePerUnit);
         }
         return discount;
     }

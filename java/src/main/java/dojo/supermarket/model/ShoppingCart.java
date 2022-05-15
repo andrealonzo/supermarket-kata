@@ -27,12 +27,12 @@ public class ShoppingCart {
 
     void addReceiptDiscounts(Receipt receipt, Map<Product, Offer> productOfferMap, SupermarketCatalog catalog) {
         for (Product product: getProductQuantitiesMap().keySet()) {
-            double quantityInWeight = productQuantitiesMap.get(product);
+            double quantity = productQuantitiesMap.get(product);
             if (productOfferMap.containsKey(product)) {
                 Offer offer = productOfferMap.get(product);
                 OfferBook offerBook = new OfferBook();
                 double pricePerUnit = catalog.getUnitPrice(product);
-                Discount discount = offerBook.getDiscount(pricePerUnit, product, quantityInWeight, offer);
+                Discount discount = offerBook.getDiscount(pricePerUnit, product, quantity, offer);
                if (discount != null)
                     receipt.addDiscount(discount);
             }
