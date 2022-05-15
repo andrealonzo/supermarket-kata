@@ -11,7 +11,7 @@ public class PercentDiscountOffer extends Offer{
     }
 
     @Override
-    public boolean canBeApplied(Offer offer, double quantityAsWeight) {
+    public boolean canBeApplied(double quantityAsWeight) {
         return true;
     }
 
