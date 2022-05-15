@@ -5,19 +5,13 @@ import dojo.supermarket.model.discount.Discount;
 
 public abstract class Offer {
     private final Product product;
-    private double price;
 
-    public Offer(Product product, double price) {
-        this.price = price;
+    public Offer(Product product ) {
         this.product = product;
     }
 
     public Product getProduct() {
         return product;
-    }
-
-    public double getPrice() {
-        return price;
     }
 
 

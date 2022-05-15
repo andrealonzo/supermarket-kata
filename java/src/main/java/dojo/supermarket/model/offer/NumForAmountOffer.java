@@ -9,8 +9,7 @@ public class NumForAmountOffer extends Offer{
     private double price;
 
     public NumForAmountOffer(Product product, int numItems, double price) {
-
-        super(product, price);
+        super(product);
         this.price = price;
         this.numItems = numItems;
     }
