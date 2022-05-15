@@ -169,28 +169,24 @@ public class SupermarketTest {
         assertEquals(2.5, receiptItem.getQuantity());
 
     }
-//    @Test
-//    public void tenPercentDiscountOnToothbrush() {
-//        Offer offer = new TenPercentDiscountOffer(apples, 10.0);
-//        teller.addOffer(offer);
-//
-//        cart.addProductQuantity(toothbrush, 2);
-//
-//        // ACT
-//        Receipt receipt = teller.checksOutArticlesFrom(cart);
-//
-//        // ASSERT
-//        assertEquals(4.975, receipt.getTotalPrice(), 0.01);
-//        assertFalse( receipt.getDiscounts().isEmpty());
-//        assertEquals(1, receipt.getItems().size());
-//
-//        ReceiptItem receiptItem = receipt.getItems().get(0);
-//        assertEquals(apples, receiptItem.getProduct());
-//        assertEquals(1.99, receiptItem.getPrice());
-//        assertEquals(2.5 * 1.99, receiptItem.getTotalPrice());
-//        assertEquals(2.5, receiptItem.getQuantity());
-//
-//    }
+    @Test
+    public void tenPercentDiscountOnToothbrush() {
+
+        Product toothbrush = new Product("toothbrush", ProductUnitType.Each);
+        catalog.addProduct(toothbrush, 0.99);
+        Offer offer = new TenPercentDiscountOffer(toothbrush, 10.0);
+        teller.addOffer(offer);
+
+        cart.addProductQuantity(toothbrush, 2);
+
+        // ACT
+        Receipt receipt = teller.checksOutArticlesFrom(cart);
+
+        // ASSERT
+        assertEquals(1.78, receipt.getTotalPrice(), 0.01);
+        assertFalse( receipt.getDiscounts().isEmpty());
+
+    }
 
     @Test
     public void addItemsMultipleTimes() {
