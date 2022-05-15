@@ -1,5 +1,7 @@
 package dojo.supermarket.model;
 
+import dojo.supermarket.model.product.Product;
+import dojo.supermarket.model.product.ProductUnitType;
 import dojo.supermarket.model.receipt.ReceiptItem;
 import org.junit.jupiter.api.Test;
 

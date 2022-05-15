@@ -1,5 +1,8 @@
 package dojo.supermarket.model;
 
+import dojo.supermarket.model.product.Product;
+import dojo.supermarket.model.product.ProductAndAmount;
+
 import java.util.*;
 
 public class ShoppingCart {

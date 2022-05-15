@@ -1,5 +1,7 @@
 package dojo.supermarket.model;
 
+import dojo.supermarket.model.product.Product;
+import dojo.supermarket.model.product.ProductUnitType;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
