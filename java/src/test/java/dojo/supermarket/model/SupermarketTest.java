@@ -187,6 +187,24 @@ public class SupermarketTest {
         assertFalse( receipt.getDiscounts().isEmpty());
 
     }
+    @Test
+    public void twentyPercentDiscountOnToothbrush() {
+
+        Product toothbrush = new Product("toothbrush", ProductUnitType.Each);
+        catalog.addProduct(toothbrush, 0.99);
+        Offer offer = new TenPercentDiscountOffer(toothbrush, 20.0);
+        teller.addOffer(offer);
+
+        cart.addProductQuantity(toothbrush, 2);
+
+        // ACT
+        Receipt receipt = teller.checksOutArticlesFrom(cart);
+
+        // ASSERT
+        assertEquals(1.58, receipt.getTotalPrice(), 0.01);
+        assertFalse( receipt.getDiscounts().isEmpty());
+
+    }
 
     @Test
     public void addItemsMultipleTimes() {
