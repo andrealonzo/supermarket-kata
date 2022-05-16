@@ -9,11 +9,8 @@ public class ShoppingCart {
 
     private Map<Product, ProductAndAmount> productsAndAmountsMap = new HashMap<>();
 
-    private Map<Product, ProductAndAmount> getProductsAndAmountsMap() {
-        return productsAndAmountsMap;
-    }
-    public Collection <ProductAndAmount> getProductsAndAmounts(){
-        return getProductsAndAmountsMap().values();
+    public List<ProductAndAmount> getProductsAndAmounts(){
+        return productsAndAmountsMap.values().stream().toList();
     }
     public void addProductAndAmount(Product product, double amount) {
         ProductAndAmount productAndAmount = new ProductAndAmount(product, amount);
