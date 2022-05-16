@@ -3,6 +3,8 @@ package dojo.supermarket.model.receipt;
 import dojo.supermarket.model.discount.Discount;
 import dojo.supermarket.model.product.Product;
 import dojo.supermarket.model.product.ProductUnitType;
+import dojo.supermarket.model.receipt.printer.ReceiptPrinter;
+import dojo.supermarket.model.receipt.printer.TraditionalReceiptPrinter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

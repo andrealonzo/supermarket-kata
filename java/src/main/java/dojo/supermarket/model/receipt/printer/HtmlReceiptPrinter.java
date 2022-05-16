@@ -1,4 +1,6 @@
-package dojo.supermarket.model.receipt;
+package dojo.supermarket.model.receipt.printer;
+
+import dojo.supermarket.model.receipt.Receipt;
 
 public class HtmlReceiptPrinter implements ReceiptPrinter {
     private ReceiptPrinter receiptPrinter;
