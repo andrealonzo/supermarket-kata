@@ -3,21 +3,28 @@ package dojo.supermarket.model.receipt;
 import dojo.supermarket.model.discount.Discount;
 import dojo.supermarket.model.product.Product;
 import dojo.supermarket.model.product.ProductUnitType;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TraditionalReceiptPrinterTest {
+public class HtmlReceiptPrinterTest {
 
+
+    private ReceiptPrinter printer;
+
+    @BeforeEach
+    public void setup(){
+        printer= new HtmlReceiptPrinter();
+    }
     @Test
     public void printBlankReceipt() {
 
         Receipt receipt = new Receipt();
-        TraditionalReceiptPrinter printer = new TraditionalReceiptPrinter();
         String actualPrintout = printer.printReceipt(receipt);
 
         String expectedPrintout = """
-                
+                                
                 Total:                              0.00
                 """;
         assertEquals(expectedPrintout, actualPrintout);
@@ -27,7 +34,7 @@ public class TraditionalReceiptPrinterTest {
     public void printReceiptWithItemsButNoDiscounts() {
         //GIVEN
         Receipt receipt = new Receipt();
-        TraditionalReceiptPrinter printer = new TraditionalReceiptPrinter();
+
 
         Product product = new Product("bananas", ProductUnitType.Each);
         receipt.addPurchase(product, 5, .50);
@@ -43,15 +50,16 @@ public class TraditionalReceiptPrinterTest {
                 """;
         assertEquals(expectedPrintout, actualPrintout);
     }
+
     @Test
     public void printReceiptWithDiscountsButNoProductsPurchased() {
 
         Receipt receipt = new Receipt();
 
         Product product = new Product("bananas", ProductUnitType.Each);
-        Discount discount = new Discount( product, "Free Money For All", -.99);
+        Discount discount = new Discount(product, "Free Money For All", -.99);
         receipt.addDiscountsApplied(discount);
-        TraditionalReceiptPrinter printer = new TraditionalReceiptPrinter();
+
         String actualPrintout = printer.printReceipt(receipt);
 
 
@@ -70,10 +78,10 @@ public class TraditionalReceiptPrinterTest {
         Receipt receipt = new Receipt();
 
         Product product = new Product("bananas", ProductUnitType.Each);
-        Discount discount = new Discount( product, "Bananas 2 for 1", -.99);
+        Discount discount = new Discount(product, "Bananas 2 for 1", -.99);
         receipt.addPurchase(product, 2, .99);
         receipt.addDiscountsApplied(discount);
-        TraditionalReceiptPrinter printer = new TraditionalReceiptPrinter();
+
         String actualPrintout = printer.printReceipt(receipt);
 
 
@@ -94,10 +102,10 @@ public class TraditionalReceiptPrinterTest {
         Receipt receipt = new Receipt();
 
         Product product = new Product("bananas", ProductUnitType.Kilo);
-        Discount discount = new Discount( product, "Bananas 2 for 1", -.99);
+        Discount discount = new Discount(product, "Bananas 2 for 1", -.99);
         receipt.addPurchase(product, 2, .99);
         receipt.addDiscountsApplied(discount);
-        TraditionalReceiptPrinter printer = new TraditionalReceiptPrinter();
+
         String actualPrintout = printer.printReceipt(receipt);
 
 
@@ -108,7 +116,20 @@ public class TraditionalReceiptPrinterTest {
                                 
                 Total:                              0.99
                 """;
+        expectedPrintout = generateHtmlVersion(expectedPrintout);
         assertEquals(expectedPrintout, actualPrintout);
     }
+
+    private String generateHtmlVersion(String expectedPrintout) {
+        String html = """
+                    <html>
+                        <body>
+                        %s
+                        </body>
+                    </html>
+                """.formatted(expectedPrintout);
+        return html;
+    }
+
 
 }
