@@ -5,7 +5,7 @@ import dojo.supermarket.model.product.ProductUnitType;
 
 import java.util.Locale;
 
-public class TraditionalReceiptPrinter {
+public class TraditionalReceiptPrinter implements ReceiptPrinter{
 
     private final int columns;
 

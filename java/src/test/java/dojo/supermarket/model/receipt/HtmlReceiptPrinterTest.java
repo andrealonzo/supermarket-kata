@@ -15,7 +15,7 @@ public class HtmlReceiptPrinterTest {
 
     @BeforeEach
     public void setup(){
-        printer= new HtmlReceiptPrinter();
+        printer= new HtmlReceiptPrinter(new TraditionalReceiptPrinter());
     }
     @Test
     public void printBlankReceipt() {
@@ -27,6 +27,7 @@ public class HtmlReceiptPrinterTest {
                                 
                 Total:                              0.00
                 """;
+        expectedPrintout = generateHtmlVersion(expectedPrintout);
         assertEquals(expectedPrintout, actualPrintout);
     }
 
@@ -48,6 +49,7 @@ public class HtmlReceiptPrinterTest {
                               
                 Total:                              2.50
                 """;
+        expectedPrintout = generateHtmlVersion(expectedPrintout);
         assertEquals(expectedPrintout, actualPrintout);
     }
 
@@ -68,6 +70,7 @@ public class HtmlReceiptPrinterTest {
                                 
                 Total:                             -0.99
                 """;
+        expectedPrintout = generateHtmlVersion(expectedPrintout);
         assertEquals(expectedPrintout, actualPrintout);
     }
 
@@ -92,6 +95,7 @@ public class HtmlReceiptPrinterTest {
                                 
                 Total:                              0.99
                 """;
+        expectedPrintout = generateHtmlVersion(expectedPrintout);
         assertEquals(expectedPrintout, actualPrintout);
     }
 
