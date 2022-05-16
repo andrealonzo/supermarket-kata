@@ -24,5 +24,5 @@ public abstract class Offer {
 
     public abstract boolean canBeApplied(ProductAndAmount productAndAmount, ShoppingCart shoppingCart);
 
-    public abstract List<Discount> getDiscounts(ProductAndAmount productAndAmount, double unitPrice);
+    public abstract Discount getDiscount(ProductAndAmount productAndAmount, double unitPrice);
 }

@@ -11,6 +11,7 @@ import java.util.List;
 public class BundleOffer extends Offer {
 
     private double discount;
+
     public BundleOffer(List<Product> affectedProducts, double discount) {
         super(affectedProducts);
         this.discount = discount;
@@ -18,8 +19,8 @@ public class BundleOffer extends Offer {
 
     @Override
     public boolean canBeApplied(ProductAndAmount productAndAmount, ShoppingCart shoppingCart) {
-        for (Product product: this.getAffectedProducts()){
-            if(!shoppingCart.productExists(product)){
+        for (Product product : this.getAffectedProducts()) {
+            if (!shoppingCart.productExists(product)) {
                 return false;
             }
         }
@@ -27,11 +28,11 @@ public class BundleOffer extends Offer {
     }
 
     @Override
-    public List<Discount> getDiscounts(ProductAndAmount productAndAmount, double unitPrice) {
+    public Discount getDiscount(ProductAndAmount productAndAmount, double unitPrice) {
 
-        double discountAmount = (productAndAmount.getAmount()*unitPrice)*discount;
-        Discount discount = new Discount(productAndAmount.getProduct(),"Bundle Discount", -discountAmount);
-        return Arrays.asList(discount);
+        double discountAmount = (productAndAmount.getAmount() * unitPrice) * discount;
+        Discount discount = new Discount(productAndAmount.getProduct(), "Bundle Discount", -discountAmount);
+        return discount;
 
     }
 }

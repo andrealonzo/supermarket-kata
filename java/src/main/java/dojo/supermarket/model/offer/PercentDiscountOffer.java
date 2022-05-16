@@ -22,14 +22,16 @@ public class PercentDiscountOffer extends Offer {
     }
 
     @Override
-    public List<Discount> getDiscounts(ProductAndAmount productAndAmount, double unitPrice) {
+    public Discount getDiscount(ProductAndAmount productAndAmount, double unitPrice) {
+            Discount discount = new Discount(productAndAmount.getProduct(), getDescription(), getDiscountAmount(productAndAmount, unitPrice));
+            return discount;
+    }
 
-        List<Discount> discounts = new ArrayList<>();
-        for (Product affectedProduct : this.getAffectedProducts()) {
-            Discount discount = new Discount(affectedProduct, discountPercentage + "% off", -productAndAmount.getAmount() * unitPrice * discountPercentage / 100.0);
+    private double getDiscountAmount(ProductAndAmount productAndAmount, double unitPrice) {
+        return -productAndAmount.getAmount() * unitPrice * discountPercentage / 100.0;
+    }
 
-            discounts.add(discount);
-        }
-        return discounts;
+    private String getDescription() {
+        return discountPercentage + "% off";
     }
 }

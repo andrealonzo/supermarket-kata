@@ -8,7 +8,7 @@ import dojo.supermarket.model.discount.Discount;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NumForAmountOffer extends Offer{
+public class NumForAmountOffer extends Offer {
 
     private int numItems;
     private double amount;
@@ -25,15 +25,13 @@ public class NumForAmountOffer extends Offer{
     }
 
     @Override
-    public List<Discount> getDiscounts(ProductAndAmount productAndAmount, double unitPrice) {
+    public Discount getDiscount(ProductAndAmount productAndAmount, double unitPrice) {
         int quantityAsEaches = (int) productAndAmount.getAmount();
         int numberOfXs = quantityAsEaches / numItems;
         double discountTotal = unitPrice * productAndAmount.getAmount() - (amount * numberOfXs + quantityAsEaches % numItems * unitPrice);
-        List<Discount> discounts = new ArrayList<>();
-        for(Product affectedProduct: this.getAffectedProducts()){
-            Discount discount = new Discount(affectedProduct, numItems + " for " + amount, -discountTotal);
-            discounts.add(discount);
-        }
-        return discounts;
+
+        Discount discount = new Discount(productAndAmount.getProduct(), numItems + " for " + amount, -discountTotal);
+
+        return discount;
     }
 }

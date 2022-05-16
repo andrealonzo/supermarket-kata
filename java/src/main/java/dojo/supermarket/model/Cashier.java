@@ -50,9 +50,8 @@ public class Cashier {
                 Offer offer = productOfferMap.get(product);
                 double pricePerUnit = catalog.getPricePerUnit(product);
                 if(offer.canBeApplied(productAndAmount, shoppingCart)){
-                    List<Discount> discounts = offer.getDiscounts(productAndAmount, pricePerUnit);
-                    discounts.stream()
-                            .forEach(discount -> receipt.addDiscountsApplied(discount));
+                    Discount discount = offer.getDiscount(productAndAmount, pricePerUnit);
+                    receipt.addDiscountsApplied(discount);
 
                 }
             }

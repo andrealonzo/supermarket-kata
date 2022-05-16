@@ -25,16 +25,13 @@ public class NumForNumOffer extends Offer{
     }
 
     @Override
-    public List<Discount> getDiscounts(ProductAndAmount productAndAmount, double unitPrice) {
+    public Discount getDiscount(ProductAndAmount productAndAmount, double unitPrice) {
         int quantityAsEaches = (int) productAndAmount.getAmount();
         int numberOfXs = quantityAsEaches / num1Items;
         double discountAmount = productAndAmount.getAmount() * unitPrice - ((numberOfXs * num2Items * unitPrice) + quantityAsEaches % num1Items * unitPrice);
-        List<Discount> discounts = new ArrayList<>();
-        for(Product affectedProduct: this.getAffectedProducts()){
-            Discount discount = new Discount(affectedProduct, num1Items + " for " + num2Items, -discountAmount);
-            discounts.add(discount);
-        }
-        return discounts;
+
+            Discount discount = new Discount(productAndAmount.getProduct(), num1Items + " for " + num2Items, -discountAmount);
+        return discount;
 
     }
 }
